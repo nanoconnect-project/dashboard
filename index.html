@@ -847,92 +847,131 @@ function renderTracker() {
 }
 
 // ════════════════════════════════════════════════
-//  SCHEDULE
+//  SCHEDULE — schedule_2026.md 를 GitHub에서 fetch하여 파싱
 // ════════════════════════════════════════════════
-const SCHEDULE_DATA = [
-  { label:'1분기', title:'단색 QD-EL 핵심 기술 완성 및 컬러 패널 제작 착수', color:'var(--accent)',
-    months:[
-      { name:'1월', tasks:[
-        { id:'s01', text:'단색 QD-EL 전사 공정 최적화', orgs:['KIMM','금오공대'], done:true },
-        { id:'s02', text:'QD 박막 전사 기술이전', orgs:['KIMM','파인랩'], done:true },
-      ]},
-      { name:'2월', tasks:[
-        { id:'s03', text:'색상별 2인치 QD-EL 소자 효율 평가 및 개선', orgs:['SKKU'], done:false },
-        { id:'s04', text:'5000 PPI 백플레인 제조 공정 확립', orgs:['NNFC'], done:false },
-      ]},
-      { name:'3월', tasks:[
-        { id:'s05', text:'RGB 컬러 적층 전사 1차 시험', orgs:['KIMM'], done:false },
-        { id:'s06', text:'RGB 컬러 패널 제작 착수', orgs:[], done:false, milestone:true },
-      ]},
-    ]},
-  { label:'2분기', title:'RGB 컬러 QD-EL 적층 전사 개발 및 IMID 전시용 샘플 제작', color:'var(--accent2)',
-    months:[
-      { name:'4월', tasks:[
-        { id:'s07', text:'RGB 적층 전사 공정 문제점 분석 및 개선', orgs:['KIMM','금오공대'], done:false },
-        { id:'s08', text:'전하전달층-QD 다층 박막 계면 안정화 검증', orgs:['SKKU'], done:false },
-      ]},
-      { name:'5월', tasks:[
-        { id:'s09', text:'8인치 스케일 RGB 컬러 적층 전사 시험', orgs:['KIMM'], done:false },
-        { id:'s10', text:'8인치 컬러 점등 백플레인 1차 제작', orgs:['NNFC'], done:false },
-      ]},
-      { name:'6월', tasks:[
-        { id:'s11', text:'IMID 2026 전시용 8인치 5000 PPI 컬러 패널 제작 완료', orgs:[], done:false, milestone:true },
-        { id:'s12', text:'전시용 패널 점등 테스트 및 품질 검증', orgs:[], done:false },
-      ]},
-    ]},
-  { label:'3분기', title:'IMID 2026 전시회 및 8인치 컬러 패널 품질 개선', color:'var(--accent4)',
-    months:[
-      { name:'7월', tasks:[
-        { id:'s13', text:'IMID 2026 전시회 참가 — 5000 PPI급 8인치 컬러 QD-EL 패널 전시', orgs:[], done:false, milestone:true },
-        { id:'s14', text:'전시회 피드백 수렴 및 개선 방향 도출', orgs:[], done:false },
-      ]},
-      { name:'8월', tasks:[
-        { id:'s15', text:'8인치 컬러 패널 수율 개선', orgs:['금오공대'], done:false },
-        { id:'s16', text:'QD-EL 소자 효율 최적화', orgs:['SKKU'], done:false },
-      ]},
-      { name:'9월', tasks:[
-        { id:'s17', text:'프론트플레인 제조 공정 실용화 완료', orgs:['파인랩'], done:false },
-        { id:'s18', text:'공인인증용 최종 샘플 제작 착수', orgs:[], done:false, milestone:true },
-      ]},
-    ]},
-  { label:'4분기', title:'기술적 목표 달성 공인인증 및 과제 마무리', color:'var(--accent3)',
-    months:[
-      { name:'10월', tasks:[
-        { id:'s19', text:'5000 PPI 달성 전자현미경 검사 인증', orgs:['NNFC'], done:false },
-        { id:'s20', text:'QD-EL 소자 EQE 목표 달성 인증', orgs:['SKKU'], done:false },
-      ]},
-      { name:'11월', tasks:[
-        { id:'s21', text:'8인치 웨이퍼 구현 인증', orgs:['KIMM'], done:false },
-        { id:'s22', text:'전사 수율 목표 달성 인증', orgs:['KIMM','금오공대'], done:false },
-        { id:'s23', text:'전사 기반 양자점 디스플레이 제조 기술 이전', orgs:['파인랩'], done:false },
-      ]},
-      { name:'12월', tasks:[
-        { id:'s24', text:'전체 공인인증 완료 및 최종 성과 보고서 작성', orgs:[], done:false, milestone:true },
-        { id:'s25', text:'과제 마무리 및 정산', orgs:[], done:false },
-      ]},
-    ]},
+
+const SCHEDULE_MD_URL =
+  `${BASE}/dashboard/main/schedule_2026.md`;
+
+const QUARTER_COLORS = [
+  'var(--accent)', 'var(--accent2)', 'var(--accent4)', 'var(--accent3)'
 ];
 
-const ORG_TAG_CLS = { KIMM:'tag-kimm', SKKU:'tag-skku', NNFC:'tag-nnfc', '금오공대':'tag-kit', '파인랩':'tag-fl' };
+const ORG_TAG_CLS = {
+  KIMM:'tag-kimm', SKKU:'tag-skku', NNFC:'tag-nnfc', '금오공대':'tag-kit', '파인랩':'tag-fl'
+};
 
-// 체크 상태 저장 (sessionStorage)
-function loadSchState() {
-  try { return JSON.parse(sessionStorage.getItem('nc_sch')||'{}'); } catch { return {}; }
+// ── MD 파서 ──────────────────────────────────────
+// schedule_2026.md → SCHEDULE_DATA 배열로 변환
+function parseScheduleMD(md) {
+  const lines = md.split('\n');
+  const quarters = [];
+  let curQ = null, curMonth = null, taskIdx = 0;
+
+  for (const raw of lines) {
+    const line = raw.trimEnd();
+
+    // 분기 헤더: ## Q1 · 1분기 (1~3월)
+    if (/^## Q\d/.test(line)) {
+      curMonth = null;
+      curQ = { label: '', title: '', color: '', months: [] };
+      // "## Q1 · 1분기 (1~3월)" → label = "1분기"
+      const m = line.match(/##\s+Q\d+\s*[··]?\s*(.+)/);
+      curQ.label = m ? m[1].trim() : line.replace(/^##\s*/, '');
+      curQ.color = QUARTER_COLORS[quarters.length] || 'var(--accent)';
+      quarters.push(curQ);
+      continue;
+    }
+
+    // 분기 제목: **제목**  (분기 헤더 바로 다음 줄)
+    if (curQ && !curMonth && /^\*\*(.+)\*\*/.test(line)) {
+      curQ.title = line.replace(/^\*\*/, '').replace(/\*\*$/, '').trim();
+      continue;
+    }
+
+    // 월 헤더: ### 1월
+    if (/^### /.test(line) && curQ) {
+      curMonth = { name: line.replace(/^### /, '').trim(), tasks: [] };
+      curQ.months.push(curMonth);
+      continue;
+    }
+
+    // 태스크 항목: - [x] 또는 - [ ]
+    if (/^- \[[ x]\]/.test(line) && curMonth) {
+      const done = line.startsWith('- [x]');
+      // 태그 추출: `KIMM` `SKKU` ...
+      const orgs = [];
+      const tagMatches = line.matchAll(/`([^`]+)`/g);
+      for (const t of tagMatches) orgs.push(t[1]);
+      // 텍스트 정리: 체크박스·태그 제거
+      let text = line
+        .replace(/^- \[[ x]\]\s*/, '')
+        .replace(/`[^`]+`/g, '')
+        .trim();
+      // 마일스톤 여부
+      const milestone = text.startsWith('★');
+      text = text.replace(/^★\s*/, '').trim();
+
+      taskIdx++;
+      curMonth.tasks.push({
+        id: `s${String(taskIdx).padStart(2,'0')}`,
+        text, orgs, done, milestone
+      });
+    }
+  }
+  return quarters;
 }
-function saveSchState() {
-  const obj = {};
-  SCHEDULE_DATA.forEach(q => q.months.forEach(m => m.tasks.forEach(t => { obj[t.id] = t.done; })));
-  try { sessionStorage.setItem('nc_sch', JSON.stringify(obj)); } catch {}
+
+// ── 로컬 체크 상태 (localStorage) ────────────────
+// MD 파일의 done 값이 기준이지만, 브라우저에서 클릭한
+// 상태는 localStorage에 덮어쓰기 저장하여 새로고침 후에도 유지
+function loadLocalState() {
+  try { return JSON.parse(localStorage.getItem('nc_sch_local') || '{}'); } catch { return {}; }
 }
-function applySchState() {
-  const s = loadSchState();
-  SCHEDULE_DATA.forEach(q => q.months.forEach(m => m.tasks.forEach(t => {
+function saveLocalState(id, done) {
+  const s = loadLocalState();
+  s[id] = done;
+  try { localStorage.setItem('nc_sch_local', JSON.stringify(s)); } catch {}
+}
+function applyLocalState(data) {
+  const s = loadLocalState();
+  data.forEach(q => q.months.forEach(m => m.tasks.forEach(t => {
     if (s[t.id] !== undefined) t.done = s[t.id];
   })));
 }
 
-function allSchTasks() { return SCHEDULE_DATA.flatMap(q => q.months.flatMap(m => m.tasks)); }
-function schPct(tasks) { return tasks.length ? Math.round(tasks.filter(t=>t.done).length/tasks.length*100) : 0; }
+// ── 전역 SCHEDULE_DATA (fetch 후 채워짐) ─────────
+let SCHEDULE_DATA = [];
+
+// ── MD fetch 및 일정 렌더링 ───────────────────────
+async function loadAndRenderSchedule() {
+  const root = document.getElementById('schedule-root');
+  root.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:16px">일정 데이터 불러오는 중...</div>`;
+
+  try {
+    const res = await fetch(SCHEDULE_MD_URL + '?nocache=' + Date.now());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const md = await res.text();
+    SCHEDULE_DATA = parseScheduleMD(md);
+  } catch (e) {
+    root.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--danger);font-size:16px">
+      ⚠ schedule_2026.md 로드 실패: ${e.message}<br>
+      <span style="font-size:14px;color:var(--muted)">dashboard 레포지토리에 파일이 있는지 확인하세요.</span>
+    </div>`;
+    return;
+  }
+
+  applyLocalState(SCHEDULE_DATA);
+  renderSchedule();
+}
+
+// ── 렌더링 ────────────────────────────────────────
+function allSchTasks() {
+  return SCHEDULE_DATA.flatMap(q => q.months.flatMap(m => m.tasks));
+}
+function schPct(tasks) {
+  return tasks.length ? Math.round(tasks.filter(t => t.done).length / tasks.length * 100) : 0;
+}
 
 function updateSchGlobal() {
   const p = schPct(allSchTasks());
@@ -943,30 +982,38 @@ function updateSchGlobal() {
     const qp = schPct(tasks);
     const pctEl = document.getElementById(`qpct-${qi}`);
     const barEl = document.getElementById(`qbar-${qi}`);
-    if (pctEl) { pctEl.textContent = qp+'%'; pctEl.style.color = qp===100?'var(--success)':qp>0?'var(--accent)':'var(--muted)'; }
-    if (barEl) barEl.style.width = qp+'%';
+    if (pctEl) {
+      pctEl.textContent = qp + '%';
+      pctEl.style.color = qp === 100 ? 'var(--success)' : qp > 0 ? 'var(--accent)' : 'var(--muted)';
+    }
+    if (barEl) barEl.style.width = qp + '%';
   });
 }
 
 function toggleTask(id) {
-  SCHEDULE_DATA.forEach(q => q.months.forEach(m => m.tasks.forEach(t => { if (t.id===id) t.done=!t.done; })));
-  saveSchState();
+  SCHEDULE_DATA.forEach(q => q.months.forEach(m => m.tasks.forEach(t => {
+    if (t.id === id) { t.done = !t.done; saveLocalState(id, t.done); }
+  })));
   const el = document.querySelector(`[data-task="${id}"]`);
   if (el) el.classList.toggle('done');
   updateSchGlobal();
 }
 
 function renderSchedule() {
-  applySchState();
   const root = document.getElementById('schedule-root');
   root.innerHTML = SCHEDULE_DATA.map((q, qi) => {
     const tasks = q.months.flatMap(m => m.tasks);
     const p = schPct(tasks);
     const monthsHtml = q.months.map(m => {
       const tasksHtml = m.tasks.map(t => {
-        const tags = t.orgs.map(o => `<span class="task-tag ${ORG_TAG_CLS[o]||''}">${o}</span>`).join('');
-        return `<div class="task-item${t.done?' done':''}${t.milestone?' milestone':''}" data-task="${t.id}" onclick="toggleTask('${t.id}')">
-          ${t.milestone ? `<span class="milestone-star">★</span>` : `<div class="task-checkbox"></div>`}
+        const tags = t.orgs.map(o =>
+          `<span class="task-tag ${ORG_TAG_CLS[o] || ''}">${o}</span>`
+        ).join('');
+        return `<div class="task-item${t.done ? ' done' : ''}${t.milestone ? ' milestone' : ''}"
+                  data-task="${t.id}" onclick="toggleTask('${t.id}')">
+          ${t.milestone
+            ? `<span class="milestone-star">★</span>`
+            : `<div class="task-checkbox"></div>`}
           <div class="task-right">
             <div class="task-text">${t.text}</div>
             ${t.orgs.length ? `<div class="task-tags">${tags}</div>` : ''}
@@ -974,19 +1021,36 @@ function renderSchedule() {
         </div>`;
       }).join('');
       return `<div class="month-group">
-        <div class="month-label-row"><span class="month-badge">${m.name}</span><div class="month-rule"></div></div>
+        <div class="month-label-row">
+          <span class="month-badge">${m.name}</span>
+          <div class="month-rule"></div>
+        </div>
         ${tasksHtml}
       </div>`;
     }).join('');
+
     return `<div class="quarter-block">
       <div class="quarter-header">
-        <div><div class="quarter-label">${q.label} · 2026</div><div class="quarter-title">${q.title}</div></div>
-        <div style="text-align:right"><div class="qpct" id="qpct-${qi}" style="color:${p===100?'var(--success)':p>0?'var(--accent)':'var(--muted)'}">${p}%</div><div class="qpct-label">달성</div></div>
+        <div>
+          <div class="quarter-label">${q.label} · 2026</div>
+          <div class="quarter-title">${q.title}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="qpct" id="qpct-${qi}"
+            style="color:${p===100?'var(--success)':p>0?'var(--accent)':'var(--muted)'}">
+            ${p}%
+          </div>
+          <div class="qpct-label">달성</div>
+        </div>
       </div>
-      <div class="quarter-bar-bg"><div class="quarter-bar-fill" id="qbar-${qi}" style="width:${p}%;background:${q.color}"></div></div>
+      <div class="quarter-bar-bg">
+        <div class="quarter-bar-fill" id="qbar-${qi}"
+          style="width:${p}%;background:${q.color}"></div>
+      </div>
       <div class="months-list">${monthsHtml}</div>
     </div>`;
   }).join('');
+
   updateSchGlobal();
 }
 
@@ -1005,8 +1069,8 @@ document.querySelectorAll('.tab').forEach(btn => {
 // ════════════════════════════════════════════════
 //  INIT
 // ════════════════════════════════════════════════
-renderSchedule();
-loadData();
+loadAndRenderSchedule();  // MD 파일에서 일정 로드
+loadData();               // CSV 파일에서 샘플 현황 로드
 </script>
 </body>
 </html>
