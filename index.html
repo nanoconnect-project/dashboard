@@ -154,9 +154,12 @@
     border: none; border-radius: 8px;
     color: #fff; cursor: pointer; transition: all 0.2s;
     box-shadow: 0 2px 8px rgba(0,87,255,0.25);
+    display: inline-flex; align-items: center; gap: 8px;
   }
   .refresh-btn:hover { background: #0044CC; box-shadow: 0 4px 12px rgba(0,87,255,0.35); transform: translateY(-1px); }
-  .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .refresh-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; background: #0044CC; }
+  .refresh-btn .btn-icon { display: inline-block; }
+  .refresh-btn:disabled .btn-icon { animation: spin 0.7s linear infinite; }
 
   /* ── SUMMARY BAR ── */
   .summary-bar { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; margin-bottom: 22px; }
@@ -406,7 +409,7 @@
     <div id="tab-overview" class="section active">
       <div class="refresh-row">
         <div class="last-updated">마지막 업데이트: <span id="last-updated-time">—</span></div>
-        <button class="refresh-btn" id="refresh-btn" onclick="loadData()">↻ 새로고침</button>
+        <button class="refresh-btn" id="refresh-btn" onclick="loadData()"><span class="btn-icon">↻</span> 새로고침</button>
       </div>
       <div class="summary-bar" id="summary-bar">
         <div class="summary-item"><div class="summary-icon">📦</div><div><div class="summary-num" id="sum-done" style="color:var(--accent2)">—</div><div class="summary-lbl">이번 달 완료</div></div></div>
@@ -567,7 +570,7 @@ function parseCSV(text) {
 async function loadData() {
   const btn = document.getElementById('refresh-btn');
   btn.disabled = true;
-  btn.textContent = '⟳ 로딩 중...';
+  btn.innerHTML = '<span class="btn-icon">↻</span> 불러오는 중...';
 
   const overlay = document.getElementById('loading-overlay');
   const itemsEl = document.getElementById('loading-items');
@@ -580,7 +583,7 @@ async function loadData() {
     const label = SOURCE_LABELS[key];
     const el = document.getElementById(`li-${label}`);
     try {
-      const res = await fetch(url + '?nocache=' + Date.now());
+      const res = await fetch(url + '?t=' + Date.now(), { cache: 'no-store' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
       DB[key] = parseCSV(text);
@@ -617,7 +620,7 @@ async function loadData() {
   renderTracker();
 
   btn.disabled = false;
-  btn.textContent = '↻ 새로고침';
+  btn.innerHTML = '<span class="btn-icon">↻</span> 새로고침';
 }
 
 // ════════════════════════════════════════════════
@@ -949,7 +952,7 @@ async function loadAndRenderSchedule() {
   root.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:16px">일정 데이터 불러오는 중...</div>`;
 
   try {
-    const res = await fetch(SCHEDULE_MD_URL + '?nocache=' + Date.now());
+    const res = await fetch(SCHEDULE_MD_URL + '?t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const md = await res.text();
     SCHEDULE_DATA = parseScheduleMD(md);
