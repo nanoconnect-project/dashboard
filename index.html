@@ -724,10 +724,18 @@ function buildOrgStats() {
   const kit = filterMonth(DB.kit, m);
   const kitDone = sum(kit, 'qty_completed'), kitPlan = sum(kit, 'qty_planned');
 
-  // KIMM transfer
+  // KIMM substrate (희생층 기판 발송 — kimm_substrate.csv)
+  const ksub = filterMonth(DB.kimm_sub, m);
+  const ksubDone = sum(ksub, 'qty_sent'), ksubPlan = sum(ksub, 'qty_planned');
+
+  // KIMM transfer (QD 박막 전사 — kimm_transfer.csv)
   const ktr = filterMonth(DB.kimm_tr, m);
   const ktrDone = sum(ktr, 'qty_transferred'), ktrPlan = sum(ktr, 'qty_planned');
   const pending = ktr.filter(r => ['대기','전사중'].includes(r.status)).length;
+
+  // KIMM 전체 plan/done: 두 공정 합산
+  const kimmTotalPlan = ksubPlan + ktrPlan;
+  const kimmTotalDone = ksubDone + ktrDone;
 
   function st(done, plan) {
     if (plan === 0) return 'none';
@@ -735,8 +743,8 @@ function buildOrgStats() {
   }
 
   return [
-    { key:'kimm', cls:'kimm', role:'주관기관', name:'KIMM', plan:ktrPlan, done:ktrDone, pending, status:st(ktrDone,ktrPlan),
-      bars:[{label:'QD 박막 전사', done:ktrDone, plan:ktrPlan, fill:'fill-kimm'}, {label:'NNFC 발송', done:sum(ktr,'qty_sent_to_nnfc'), plan:ktrPlan, fill:'fill-kimm'}] },
+    { key:'kimm', cls:'kimm', role:'주관기관', name:'KIMM', plan:kimmTotalPlan, done:kimmTotalDone, pending, status:st(kimmTotalDone, kimmTotalPlan),
+      bars:[{label:'희생층 기판 제작', done:ksubDone, plan:ksubPlan||10, fill:'fill-kimm'}, {label:'QD 박막 전사', done:ktrDone, plan:ktrPlan||5, fill:'fill-kimm'}] },
     { key:'skku', cls:'skku', role:'참여기관', name:'SKKU 성균관대', plan:skkuPlan||5, done:skkuDone, pending:0, status:st(skkuDone,skkuPlan||5),
       bars:[{label:'QD 박막 제작', done:skkuDone, plan:skkuPlan||5, fill:'fill-skku'}] },
     { key:'finelab', cls:'finelab', role:'기업참여기관', name:'파인랩', plan:flPlan||5, done:flDone, pending:0, status:st(flDone,flPlan||5),
