@@ -898,11 +898,10 @@ function renderTracker() {
 }
 
 // ════════════════════════════════════════════════
-//  SCHEDULE — schedule_2026.md 를 GitHub에서 fetch하여 파싱
+//  SCHEDULE — 일정 데이터 (HTML 내장 + GitHub 동기화)
 // ════════════════════════════════════════════════
 
-const SCHEDULE_MD_URL =
-  `${BASE}/dashboard/main/schedule_2026.md`;
+const SCHEDULE_MD_URL = `${BASE}/dashboard/main/schedule_2026.md`;
 
 const QUARTER_COLORS = [
   'var(--accent)', 'var(--accent2)', 'var(--accent4)', 'var(--accent3)'
@@ -912,8 +911,71 @@ const ORG_TAG_CLS = {
   KIMM:'tag-kimm', SKKU:'tag-skku', NNFC:'tag-nnfc', '금오공대':'tag-kit', '파인랩':'tag-fl'
 };
 
+// ── 내장 기본 일정 데이터 ─────────────────────────
+// GitHub 파일 로드 실패 시 이 데이터로 동작
+const DEFAULT_SCHEDULE_MD = `## Q1 · 1분기 (1~3월)
+**단색 QD-EL 핵심 기술 완성 및 컬러 패널 제작 착수**
+
+### 1월
+- [x] 단색 QD-EL 전사 공정 최적화 \`KIMM\` \`금오공대\`
+- [x] QD 박막 전사 기술이전 \`KIMM\` \`파인랩\`
+
+### 2월
+- [ ] 색상별 2인치 QD-EL 소자 효율 평가 및 개선 \`SKKU\`
+- [ ] 5000 PPI 백플레인 제조 공정 확립 \`NNFC\`
+
+### 3월
+- [ ] RGB 컬러 적층 전사 1차 시험 \`KIMM\`
+- [ ] ★ RGB 컬러 패널 제작 착수 \`KIMM\` \`SKKU\` \`NNFC\` \`금오공대\` \`파인랩\`
+
+## Q2 · 2분기 (4~6월)
+**RGB 컬러 QD-EL 적층 전사 개발 및 IMID 전시용 샘플 제작**
+
+### 4월
+- [ ] RGB 적층 전사 공정 문제점 분석 및 개선 \`KIMM\` \`금오공대\`
+- [ ] 전하전달층-QD 다층 박막 계면 안정화 검증 \`SKKU\`
+
+### 5월
+- [ ] 8인치 스케일 RGB 컬러 적층 전사 시험 \`KIMM\`
+- [ ] 8인치 컬러 점등 백플레인 1차 제작 \`NNFC\`
+
+### 6월
+- [ ] ★ IMID 2026 전시용 8인치 5000 PPI 컬러 패널 제작 완료 \`KIMM\` \`SKKU\` \`NNFC\` \`금오공대\` \`파인랩\`
+- [ ] 전시용 패널 점등 테스트 및 품질 검증 \`KIMM\` \`NNFC\`
+
+## Q3 · 3분기 (7~9월)
+**IMID 2026 전시회 및 8인치 컬러 패널 품질 개선**
+
+### 7월
+- [ ] ★ IMID 2026 전시회 참가 — 5000 PPI급 8인치 컬러 QD-EL 패널 전시 \`KIMM\` \`SKKU\` \`NNFC\` \`금오공대\` \`파인랩\`
+- [ ] 전시회 피드백 수렴 및 개선 방향 도출 \`KIMM\` \`SKKU\` \`NNFC\` \`금오공대\` \`파인랩\`
+
+### 8월
+- [ ] 8인치 컬러 패널 수율 개선 \`금오공대\`
+- [ ] QD-EL 소자 효율 최적화 \`SKKU\`
+
+### 9월
+- [ ] 프론트플레인 제조 공정 실용화 완료 \`파인랩\`
+- [ ] ★ 공인인증용 최종 샘플 제작 착수 \`KIMM\` \`SKKU\` \`NNFC\` \`금오공대\` \`파인랩\`
+
+## Q4 · 4분기 (10~12월)
+**기술적 목표 달성 공인인증 및 과제 마무리**
+
+### 10월
+- [ ] 5000 PPI 달성 전자현미경 검사 인증 \`NNFC\`
+- [ ] QD-EL 소자 EQE 목표 달성 인증 \`SKKU\`
+
+### 11월
+- [ ] 8인치 웨이퍼 구현 인증 \`KIMM\`
+- [ ] 전사 수율 목표 달성 인증 \`KIMM\` \`금오공대\`
+- [ ] 전사 기반 양자점 디스플레이 제조 기술 이전 \`파인랩\`
+
+### 12월
+- [ ] ★ 전체 공인인증 완료 및 최종 성과 보고서 작성 \`KIMM\` \`SKKU\` \`NNFC\` \`금오공대\` \`파인랩\`
+- [ ] 과제 마무리 및 정산 \`KIMM\`
+`;
+
 // ── MD 파서 ──────────────────────────────────────
-// schedule_2026.md → SCHEDULE_DATA 배열로 변환
 function parseScheduleMD(md) {
   const lines = md.split('\n');
   const quarters = [];
@@ -922,47 +984,34 @@ function parseScheduleMD(md) {
   for (const raw of lines) {
     const line = raw.trimEnd();
 
-    // 분기 헤더: ## Q1 · 1분기 (1~3월)
     if (/^## Q\d/.test(line)) {
       curMonth = null;
       curQ = { label: '', title: '', color: '', months: [] };
-      // "## Q1 · 1분기 (1~3월)" → label = "1분기"
-      const m = line.match(/##\s+Q\d+\s*[··]?\s*(.+)/);
-      curQ.label = m ? m[1].trim() : line.replace(/^##\s*/, '');
+      const m = line.match(/##\s+Q\d+\s*[···]?\s*(.+)/);
+      curQ.label = m ? m[1].trim() : line.replace(/^##\s*/,'');
       curQ.color = QUARTER_COLORS[quarters.length] || 'var(--accent)';
       quarters.push(curQ);
       continue;
     }
 
-    // 분기 제목: **제목**  (분기 헤더 바로 다음 줄)
     if (curQ && !curMonth && /^\*\*(.+)\*\*/.test(line)) {
-      curQ.title = line.replace(/^\*\*/, '').replace(/\*\*$/, '').trim();
+      curQ.title = line.replace(/^\*\*/,'').replace(/\*\*$/,'').trim();
       continue;
     }
 
-    // 월 헤더: ### 1월
     if (/^### /.test(line) && curQ) {
-      curMonth = { name: line.replace(/^### /, '').trim(), tasks: [] };
+      curMonth = { name: line.replace(/^### /,'').trim(), tasks: [] };
       curQ.months.push(curMonth);
       continue;
     }
 
-    // 태스크 항목: - [x] 또는 - [ ]
     if (/^- \[[ x]\]/.test(line) && curMonth) {
-      const done = line.startsWith('- [x]');
-      // 태그 추출: `KIMM` `SKKU` ...
+      const done = /^- \[x\]/.test(line);
       const orgs = [];
-      const tagMatches = line.matchAll(/`([^`]+)`/g);
-      for (const t of tagMatches) orgs.push(t[1]);
-      // 텍스트 정리: 체크박스·태그 제거
-      let text = line
-        .replace(/^- \[[ x]\]\s*/, '')
-        .replace(/`[^`]+`/g, '')
-        .trim();
-      // 마일스톤 여부
+      for (const t of line.matchAll(/`([^`]+)`/g)) orgs.push(t[1]);
+      let text = line.replace(/^- \[[ x]\]\s*/,'').replace(/`[^`]+`/g,'').trim();
       const milestone = text.startsWith('★');
-      text = text.replace(/^★\s*/, '').trim();
-
+      text = text.replace(/^★\s*/,'').trim();
       taskIdx++;
       curMonth.tasks.push({
         id: `s${String(taskIdx).padStart(2,'0')}`,
@@ -989,69 +1038,6 @@ function applyLocalState(data) {
   data.forEach(q => q.months.forEach(m => m.tasks.forEach(t => {
     if (s[t.id] !== undefined) t.done = s[t.id];
   })));
-}
-
-// ── 전역 SCHEDULE_DATA (fetch 후 채워짐) ─────────
-let SCHEDULE_DATA = [];
-
-// ── MD fetch 및 일정 렌더링 ───────────────────────
-async function loadAndRenderSchedule() {
-  const root = document.getElementById('schedule-root');
-  root.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:16px">일정 데이터 불러오는 중...</div>`;
-
-  try {
-    const res = await fetch(SCHEDULE_MD_URL + '?t=' + Date.now(), { cache: 'no-store' });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const md = await res.text();
-    SCHEDULE_DATA = parseScheduleMD(md);
-  } catch (e) {
-    root.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--danger);font-size:16px">
-      ⚠ schedule_2026.md 로드 실패: ${e.message}<br>
-      <span style="font-size:14px;color:var(--muted)">dashboard 레포지토리에 파일이 있는지 확인하세요.</span>
-    </div>`;
-    return;
-  }
-
-  applyLocalState(SCHEDULE_DATA);
-  renderSchedule();
-}
-
-// ── 렌더링 ────────────────────────────────────────
-function allSchTasks() {
-  return SCHEDULE_DATA.flatMap(q => q.months.flatMap(m => m.tasks));
-}
-function schPct(tasks) {
-  return tasks.length ? Math.round(tasks.filter(t => t.done).length / tasks.length * 100) : 0;
-}
-
-function updateSchGlobal() {
-  const p = schPct(allSchTasks());
-  document.getElementById('sch-total-pct').textContent = p + '%';
-  document.getElementById('sch-global-bar').style.width = p + '%';
-  SCHEDULE_DATA.forEach((q, qi) => {
-    const tasks = q.months.flatMap(m => m.tasks);
-    const qp = schPct(tasks);
-    const pctEl = document.getElementById(`qpct-${qi}`);
-    const barEl = document.getElementById(`qbar-${qi}`);
-    if (pctEl) {
-      pctEl.textContent = qp + '%';
-      pctEl.style.color = qp === 100 ? 'var(--success)' : qp > 0 ? 'var(--accent)' : 'var(--muted)';
-    }
-    if (barEl) barEl.style.width = qp + '%';
-  });
-}
-
-function toggleTask(id) {
-  let newDone;
-  SCHEDULE_DATA.forEach(q => q.months.forEach(m => m.tasks.forEach(t => {
-    if (t.id === id) { t.done = !t.done; newDone = t.done; saveLocalState(id, t.done); }
-  })));
-  const el = document.querySelector(`[data-task="${id}"]`);
-  if (el) {
-    if (newDone) el.classList.add('done'); else el.classList.remove('done');
-  }
-  updateSchGlobal();
-  pushScheduleToGitHub();
 }
 
 // ════════════════════════════════════════════════
@@ -1189,6 +1175,98 @@ async function pushScheduleToGitHub() {
     }
   }, 300);
 }
+// ── 전역 SCHEDULE_DATA ───────────────────────────
+let SCHEDULE_DATA = [];
+
+// ── MD fetch 및 일정 렌더링 ───────────────────────
+async function loadAndRenderSchedule() {
+  // 1단계: 내장 기본 데이터로 즉시 표시
+  SCHEDULE_DATA = parseScheduleMD(DEFAULT_SCHEDULE_MD);
+  applyLocalState(SCHEDULE_DATA);
+  renderSchedule();
+
+  // 2단계: GitHub에서 최신 데이터 읽기 시도
+  const pat = getGhPat();
+  try {
+    let mdText = null;
+
+    if (pat) {
+      // PAT 있으면 GitHub Contents API로 읽기 (SHA도 미리 캐시)
+      const res = await fetch(
+        `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH}`,
+        { headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github+json' },
+          cache: 'no-store' }
+      );
+      if (res.ok) {
+        const meta = await res.json();
+        _ghFileSha = meta.sha;
+        mdText = decodeURIComponent(escape(atob(meta.content.replace(/\n/g,''))));
+        const statusEl = document.getElementById('sch-save-status');
+        if (statusEl) { statusEl.textContent = '✅ GitHub 데이터 로드 완료'; statusEl.style.color = 'var(--success)'; setTimeout(()=>{ if(statusEl) statusEl.textContent=''; }, 3000); }
+      } else if (res.status === 404) {
+        const statusEl = document.getElementById('sch-save-status');
+        if (statusEl) { statusEl.textContent = '📄 schedule_2026.md 없음 — 체크박스 저장 시 자동 생성'; statusEl.style.color = 'var(--muted)'; }
+      } else {
+        throw new Error(`API ${res.status}`);
+      }
+    } else {
+      // PAT 없으면 raw URL로 읽기 시도 (public 레포만 가능)
+      const res = await fetch(SCHEDULE_MD_URL + '?t=' + Date.now(), { cache: 'no-store' });
+      if (res.ok) mdText = await res.text();
+    }
+
+    if (mdText && mdText.trim()) {
+      const parsed = parseScheduleMD(mdText);
+      if (parsed.length > 0) {
+        SCHEDULE_DATA = parsed;
+        applyLocalState(SCHEDULE_DATA);
+        renderSchedule();
+      }
+    }
+  } catch (e) {
+    // GitHub 읽기 실패해도 내장 데이터로 계속 동작
+    console.warn('schedule_2026.md 로드 실패 (내장 데이터 사용):', e.message);
+  }
+}
+
+// ── 렌더링 ────────────────────────────────────────
+function allSchTasks() {
+  return SCHEDULE_DATA.flatMap(q => q.months.flatMap(m => m.tasks));
+}
+function schPct(tasks) {
+  return tasks.length ? Math.round(tasks.filter(t => t.done).length / tasks.length * 100) : 0;
+}
+
+function updateSchGlobal() {
+  const p = schPct(allSchTasks());
+  document.getElementById('sch-total-pct').textContent = p + '%';
+  document.getElementById('sch-global-bar').style.width = p + '%';
+  SCHEDULE_DATA.forEach((q, qi) => {
+    const tasks = q.months.flatMap(m => m.tasks);
+    const qp = schPct(tasks);
+    const pctEl = document.getElementById(`qpct-${qi}`);
+    const barEl = document.getElementById(`qbar-${qi}`);
+    if (pctEl) {
+      pctEl.textContent = qp + '%';
+      pctEl.style.color = qp === 100 ? 'var(--success)' : qp > 0 ? 'var(--accent)' : 'var(--muted)';
+    }
+    if (barEl) barEl.style.width = qp + '%';
+  });
+}
+
+function toggleTask(id) {
+  let newDone;
+  SCHEDULE_DATA.forEach(q => q.months.forEach(m => m.tasks.forEach(t => {
+    if (t.id === id) { t.done = !t.done; newDone = t.done; saveLocalState(id, t.done); }
+  })));
+  const el = document.querySelector(`[data-task="${id}"]`);
+  if (el) {
+    if (newDone) el.classList.add('done'); else el.classList.remove('done');
+  }
+  updateSchGlobal();
+  pushScheduleToGitHub();
+}
+
 
 function renderSchedule() {
   const root = document.getElementById('schedule-root');
