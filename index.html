@@ -158,6 +158,7 @@
   }
   .refresh-btn:hover { background: #0044CC; box-shadow: 0 4px 12px rgba(0,87,255,0.35); transform: translateY(-1px); }
   .refresh-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; background: #0044CC; }
+  #gh-settings-btn:hover { background: var(--surface2) !important; color: var(--text) !important; box-shadow: var(--shadow-sm) !important; transform: translateY(-1px); }
   .refresh-btn .btn-icon { display: inline-block; }
   .refresh-btn:disabled .btn-icon { animation: spin 0.7s linear infinite; }
 
@@ -503,13 +504,52 @@
           <div class="schedule-meta">2026년 3차년도 · 8인치 웨이퍼 5000 PPI급 컬러 QD-EL 시작품 구현 및 공인인증</div>
           <div class="schedule-pct-label">전체 달성률 <span id="sch-total-pct">0%</span></div>
         </div>
-        <div class="schedule-legend">
-          <span class="leg-item"><span class="leg-dot" style="background:var(--success)"></span>완료</span>
-          <span class="leg-item"><span class="leg-dot" style="background:var(--border)"></span>예정</span>
-          <span class="leg-item"><span style="color:var(--warn);font-size:11px">★</span> 마일스톤</span>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <div class="schedule-legend">
+            <span class="leg-item"><span class="leg-dot" style="background:var(--success)"></span>완료</span>
+            <span class="leg-item"><span class="leg-dot" style="background:var(--border)"></span>예정</span>
+            <span class="leg-item"><span style="color:var(--warn);font-size:11px">★</span> 마일스톤</span>
+          </div>
+          <button class="refresh-btn" id="gh-settings-btn" onclick="openGhSettings()" style="padding:9px 16px;font-size:15px;background:var(--surface);color:var(--text2);border:1.5px solid var(--border2);box-shadow:none">
+            ⚙ GitHub 연동 설정
+          </button>
+          <span id="sch-save-status" style="font-family:var(--mono);font-size:13px;color:var(--muted)"></span>
         </div>
       </div>
       <div class="sch-global-bar-bg"><div class="sch-global-bar-fill" id="sch-global-bar" style="width:0%"></div></div>
+
+      <!-- GitHub 설정 패널 -->
+      <div id="gh-settings-panel" style="display:none;background:var(--surface);border:1.5px solid var(--border2);border-radius:12px;padding:22px 24px;margin-bottom:20px">
+        <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
+          <span>🔑 GitHub 연동 설정</span>
+          <button onclick="closeGhSettings()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);line-height:1">×</button>
+        </div>
+        <div style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.8">
+          체크박스 변경 사항을 <code style="background:var(--surface2);padding:2px 6px;border-radius:4px">schedule_2026.md</code> 파일에 자동 반영하려면<br>
+          GitHub Personal Access Token (PAT)이 필요합니다.<br>
+          <a href="https://github.com/settings/tokens/new?scopes=repo&description=nanoconnect-dashboard" target="_blank" style="color:var(--accent)">→ PAT 발급하기 (repo 권한 필요)</a>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:6px">GitHub PAT (브라우저에만 저장, 서버 전송 없음)</div>
+            <input type="password" id="gh-pat-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+              style="width:100%;padding:10px 14px;border:1.5px solid var(--border2);border-radius:8px;font-family:var(--mono);font-size:14px;color:var(--text);background:var(--surface2);outline:none">
+          </div>
+          <div style="display:flex;gap:8px">
+            <button onclick="saveGhPat()" style="padding:10px 18px;background:var(--kimm);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap">저장</button>
+            <button onclick="clearGhPat()" style="padding:10px 14px;background:var(--surface2);color:var(--muted);border:1.5px solid var(--border);border-radius:8px;font-size:14px;cursor:pointer">삭제</button>
+          </div>
+        </div>
+        <div id="gh-pat-status" style="margin-top:10px;font-size:13px;font-family:var(--mono)"></div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);line-height:1.9">
+          <strong style="color:var(--text2)">저장 방식:</strong><br>
+          · PAT는 이 브라우저의 <code style="background:var(--surface2);padding:1px 5px;border-radius:3px">localStorage</code>에만 저장되며 외부로 전송되지 않습니다.<br>
+          · 체크박스 클릭 시 GitHub API를 통해 <code style="background:var(--surface2);padding:1px 5px;border-radius:3px">nanoconnect-project/dashboard</code> 레포지토리의<br>
+          &nbsp;&nbsp;<code style="background:var(--surface2);padding:1px 5px;border-radius:3px">schedule_2026.md</code> 파일이 직접 업데이트됩니다.<br>
+          · PAT 미설정 시 체크 상태는 이 브라우저에만 저장됩니다.
+        </div>
+      </div>
+
       <div class="quarters-grid" id="schedule-root"></div>
     </div>
   </div>
@@ -1002,12 +1042,152 @@ function updateSchGlobal() {
 }
 
 function toggleTask(id) {
+  let newDone;
   SCHEDULE_DATA.forEach(q => q.months.forEach(m => m.tasks.forEach(t => {
-    if (t.id === id) { t.done = !t.done; saveLocalState(id, t.done); }
+    if (t.id === id) { t.done = !t.done; newDone = t.done; saveLocalState(id, t.done); }
   })));
   const el = document.querySelector(`[data-task="${id}"]`);
-  if (el) el.classList.toggle('done');
+  if (el) {
+    if (newDone) el.classList.add('done'); else el.classList.remove('done');
+  }
   updateSchGlobal();
+  pushScheduleToGitHub();
+}
+
+// ════════════════════════════════════════════════
+//  GitHub PAT 관리
+// ════════════════════════════════════════════════
+const GH_OWNER = 'nanoconnect-project';
+const GH_REPO  = 'dashboard';
+const GH_PATH  = 'schedule_2026.md';
+
+function getGhPat() {
+  try { return localStorage.getItem('nc_gh_pat') || ''; } catch { return ''; }
+}
+function openGhSettings() {
+  const panel = document.getElementById('gh-settings-panel');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  const pat = getGhPat();
+  document.getElementById('gh-pat-input').value = pat;
+  document.getElementById('gh-pat-status').textContent = pat
+    ? '✓ PAT 저장됨 — GitHub 연동 활성' : '⚠ PAT 미설정 — 브라우저 로컬 저장만 동작';
+  document.getElementById('gh-pat-status').style.color = pat ? 'var(--success)' : 'var(--warn)';
+}
+function closeGhSettings() {
+  document.getElementById('gh-settings-panel').style.display = 'none';
+}
+function saveGhPat() {
+  const val = document.getElementById('gh-pat-input').value.trim();
+  if (!val) { alert('PAT를 입력하세요.'); return; }
+  try { localStorage.setItem('nc_gh_pat', val); } catch {}
+  const st = document.getElementById('gh-pat-status');
+  st.textContent = '✓ PAT 저장 완료'; st.style.color = 'var(--success)';
+  setTimeout(() => {
+    st.textContent = '✓ PAT 저장됨 — GitHub 연동 활성'; st.style.color = 'var(--success)';
+  }, 1500);
+}
+function clearGhPat() {
+  try { localStorage.removeItem('nc_gh_pat'); } catch {}
+  document.getElementById('gh-pat-input').value = '';
+  const st = document.getElementById('gh-pat-status');
+  st.textContent = 'PAT 삭제됨 — 브라우저 로컬 저장만 동작'; st.style.color = 'var(--muted)';
+}
+
+// ════════════════════════════════════════════════
+//  현재 SCHEDULE_DATA → MD 문자열 재생성
+// ════════════════════════════════════════════════
+function buildScheduleMD() {
+  const lines = [];
+  SCHEDULE_DATA.forEach(q => {
+    lines.push(`## ${q.label}`);
+    if (q.title) lines.push(`**${q.title}**`);
+    lines.push('');
+    q.months.forEach(m => {
+      lines.push(`### ${m.name}`);
+      m.tasks.forEach(t => {
+        const check = t.done ? '[x]' : '[ ]';
+        const star  = t.milestone ? '★ ' : '';
+        const tags  = t.orgs.length ? ' ' + t.orgs.map(o => `\`${o}\``).join(' ') : '';
+        lines.push(`- ${check} ${star}${t.text}${tags}`);
+      });
+      lines.push('');
+    });
+  });
+  return lines.join('\n');
+}
+
+// ════════════════════════════════════════════════
+//  GitHub API — schedule_2026.md 업데이트
+// ════════════════════════════════════════════════
+let _ghPushTimer = null;
+let _ghFileSha = null;   // 파일 SHA 캐시 (PUT 필수)
+
+async function pushScheduleToGitHub() {
+  const pat = getGhPat();
+  const statusEl = document.getElementById('sch-save-status');
+  if (!pat) {
+    if (statusEl) { statusEl.textContent = '💾 로컬 저장됨'; statusEl.style.color = 'var(--muted)'; }
+    return;
+  }
+
+  // 300ms 디바운스 — 빠른 연속 클릭 시 마지막 한 번만 전송
+  clearTimeout(_ghPushTimer);
+  if (statusEl) { statusEl.textContent = '⏳ 저장 준비 중...'; statusEl.style.color = 'var(--muted)'; }
+
+  _ghPushTimer = setTimeout(async () => {
+    if (statusEl) { statusEl.textContent = '⏫ GitHub에 저장 중...'; statusEl.style.color = 'var(--accent)'; }
+    try {
+      // SHA를 모르면 먼저 GET으로 조회
+      if (!_ghFileSha) {
+        const getRes = await fetch(
+          `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH}`,
+          { headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github+json' } }
+        );
+        if (getRes.ok) {
+          const meta = await getRes.json();
+          _ghFileSha = meta.sha;
+        } else if (getRes.status !== 404) {
+          throw new Error(`파일 조회 실패 (${getRes.status})`);
+        }
+      }
+
+      const mdContent = buildScheduleMD();
+      const encoded   = btoa(unescape(encodeURIComponent(mdContent)));
+      const body      = {
+        message: `[dashboard] 체크박스 업데이트 ${new Date().toISOString().slice(0,16).replace('T',' ')}`,
+        content: encoded,
+        ..._ghFileSha ? { sha: _ghFileSha } : {}
+      };
+
+      const putRes = await fetch(
+        `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH}`,
+        {
+          method: 'PUT',
+          headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        }
+      );
+
+      if (!putRes.ok) {
+        const err = await putRes.json().catch(() => ({}));
+        throw new Error(err.message || `HTTP ${putRes.status}`);
+      }
+
+      const result = await putRes.json();
+      _ghFileSha = result.content?.sha || null;
+
+      if (statusEl) {
+        statusEl.textContent = `✅ GitHub 저장 완료 (${new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',second:'2-digit'})})`;
+        statusEl.style.color = 'var(--success)';
+      }
+    } catch (e) {
+      if (statusEl) {
+        statusEl.textContent = `❌ 저장 실패: ${e.message}`;
+        statusEl.style.color = 'var(--danger)';
+      }
+      _ghFileSha = null; // SHA 리셋 — 다음에 재시도
+    }
+  }, 300);
 }
 
 function renderSchedule() {
