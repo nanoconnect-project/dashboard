@@ -913,66 +913,1046 @@ const ORG_TAG_CLS = {
 
 // ── 내장 기본 일정 데이터 ─────────────────────────
 // GitHub 파일 로드 실패 시 이 데이터로 동작
-const DEFAULT_SCHEDULE_MD = `## Q1 · 1분기 (1~3월)
+const DEFAULT_SCHEDULE_MD = `## 1분기 (1~3월)
 **단색 QD-EL 핵심 기술 완성 및 컬러 패널 제작 착수**
 
 ### 1월
-- [x] 단색 QD-EL 전사 공정 최적화 \`KIMM\` \`금오공대\`
-- [x] QD 박막 전사 기술이전 \`KIMM\` \`파인랩\`
+* [ ] 단색 QD-EL 전사 공정 최적화 \`KIMM\` \`금오공대\`
+* [x] QD 박막 전사 기술이전 \`KIMM\` \`파인랩\`
 
 ### 2월
-- [ ] 색상별 2인치 QD-EL 소자 효율 평가 및 개선 \`SKKU\`
-- [ ] 5000 PPI 백플레인 제조 공정 확립 \`NNFC\`
+* [ ] 3차년도 수정계획서 업로드 및 과제협약 \`KIMM\`
+* [ ] 3차년도 시작품 제작 일정 수립 \`KIMM\`
 
 ### 3월
-- [ ] RGB 컬러 적층 전사 1차 시험 \`KIMM\`
-- [ ] ★ RGB 컬러 패널 제작 착수 \`KIMM\` \`SKKU\` \`NNFC\` \`금오공대\` \`파인랩\`
+* [ ] Kick-off 미팅
+* [ ] 참여기관별 샘플 제작 및 평가 시스템 구축
+* [ ] 단층 QD-EL 박막 화소 패터닝 공정 구현
+* [ ] 5000 PPI 백플레인 제조 공정 확립 \`NNFC\`
 
-## Q2 · 2분기 (4~6월)
+## 2분기 (4~6월)
 **RGB 컬러 QD-EL 적층 전사 개발 및 IMID 전시용 샘플 제작**
 
 ### 4월
-- [ ] RGB 적층 전사 공정 문제점 분석 및 개선 \`KIMM\` \`금오공대\`
-- [ ] 전하전달층-QD 다층 박막 계면 안정화 검증 \`SKKU\`
+* [ ] RGB QD-EL 4인치 박막 제조 공정 및 특성 평가 \`SKKU\`
+* [ ] RGB QD-EL 박막 적층 전사 공정 문제점 분석 및 개선 \`KIMM\` \`금오공대\`
+* [ ] 8인치 실리콘 백플레인 제작 \`NNFC\`
 
 ### 5월
-- [ ] 8인치 스케일 RGB 컬러 적층 전사 시험 \`KIMM\`
-- [ ] 8인치 컬러 점등 백플레인 1차 제작 \`NNFC\`
+* [ ] 8인치 스케일 RGB 컬러 적층 전사 시험 \`KIMM\`
+* [ ] 8인치 컬러 점등 백플레인 1차 제작 \`NNFC\`
 
 ### 6월
-- [ ] ★ IMID 2026 전시용 8인치 5000 PPI 컬러 패널 제작 완료 \`KIMM\` \`SKKU\` \`NNFC\` \`금오공대\` \`파인랩\`
-- [ ] 전시용 패널 점등 테스트 및 품질 검증 \`KIMM\` \`NNFC\`
+* [ ] ★ IMID 2026 전시용 8인치 5000 PPI 컬러 패널 제작 완료
+* [ ] 전시용 패널 점등 테스트 및 품질 검증 \`KIMM\` \`NNFC\`
 
-## Q3 · 3분기 (7~9월)
+## 3분기 (7~9월)
 **IMID 2026 전시회 및 8인치 컬러 패널 품질 개선**
 
 ### 7월
-- [ ] ★ IMID 2026 전시회 참가 — 5000 PPI급 8인치 컬러 QD-EL 패널 전시 \`KIMM\` \`SKKU\` \`NNFC\` \`금오공대\` \`파인랩\`
-- [ ] 전시회 피드백 수렴 및 개선 방향 도출 \`KIMM\` \`SKKU\` \`NNFC\` \`금오공대\` \`파인랩\`
+* [ ] ★ IMID 2026 전시회 참가 — 5000 PPI급 8인치 컬러 QD-EL 패널 전시
+* [ ] 전시회 피드백 수렴 및 개선 방향 도출
 
 ### 8월
-- [ ] 8인치 컬러 패널 수율 개선 \`금오공대\`
-- [ ] QD-EL 소자 효율 최적화 \`SKKU\`
+* [ ] 8인치 컬러 패널 수율 개선 \`금오공대\`
+* [ ] QD-EL 소자 효율 최적화 \`SKKU\`
 
 ### 9월
-- [ ] 프론트플레인 제조 공정 실용화 완료 \`파인랩\`
-- [ ] ★ 공인인증용 최종 샘플 제작 착수 \`KIMM\` \`SKKU\` \`NNFC\` \`금오공대\` \`파인랩\`
+* [ ] 프론트플레인 제조 공정 실용화 완료 \`파인랩\`
+* [ ] ★ 공인인증용 최종 샘플 제작 착수
 
-## Q4 · 4분기 (10~12월)
+## 4분기 (10~12월)
 **기술적 목표 달성 공인인증 및 과제 마무리**
 
 ### 10월
-- [ ] 5000 PPI 달성 전자현미경 검사 인증 \`NNFC\`
-- [ ] QD-EL 소자 EQE 목표 달성 인증 \`SKKU\`
+* [ ] 5000 PPI 달성 전자현미경 검사 인증 \`NNFC\`
+* [ ] QD-EL 소자 EQE 목표 달성 인증 \`SKKU\`
 
 ### 11월
-- [ ] 8인치 웨이퍼 구현 인증 \`KIMM\`
-- [ ] 전사 수율 목표 달성 인증 \`KIMM\` \`금오공대\`
-- [ ] 전사 기반 양자점 디스플레이 제조 기술 이전 \`파인랩\`
+* [ ] 8인치 웨이퍼 구현 인증 \`KIMM\`
+* [ ] 전사 수율 목표 달성 인증 \`KIMM\` \`금오공대\`
+* [ ] 전사 기반 양자점 디스플레이 제조 기술 이전 \`파인랩\`
 
 ### 12월
-- [ ] ★ 전체 공인인증 완료 및 최종 성과 보고서 작성 \`KIMM\` \`SKKU\` \`NNFC\` \`금오공대\` \`파인랩\`
-- [ ] 과제 마무리 및 정산 \`KIMM\`
+* [ ] ★ 전체 공인인증 완료 및 최종 성과 보고서 작성
+* [ ] 과제 마무리 및 정산 \`KIMM\`
+`;="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>나노커넥트 샘플 현황 대시보드</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:       #F4F6FA;
+    --surface:  #FFFFFF;
+    --surface2: #F0F3F9;
+    --border:   #DDE3EF;
+    --border2:  #C8D0E0;
+
+    --kimm:    #0057FF;   /* 진청 */
+    --skku:    #00A878;   /* 에메랄드 */
+    --nnfc:    #7C3AED;   /* 바이올렛 */
+    --kit:     #EA4C2B;   /* 버밀리온 */
+    --finelab: #D97706;   /* 앰버 */
+
+    --accent:  #0057FF;
+    --accent2: #00A878;
+    --accent3: #EA4C2B;
+    --accent4: #7C3AED;
+    --warn:    #D97706;
+    --danger:  #DC2626;
+    --success: #059669;
+
+    --text:    #0F172A;
+    --text2:   #334155;
+    --muted:   #64748B;
+
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.06);
+
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Pretendard', 'Noto Sans KR', sans-serif;
+    --radius: 10px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* 배경 미세 패턴 */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(circle, rgba(0,87,255,0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .wrapper { position: relative; z-index: 1; max-width: 1440px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 2px solid var(--kimm);
+    padding: 24px 32px;
+    margin: 0 -32px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+    box-shadow: var(--shadow-sm);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .logo-block { display: flex; align-items: center; gap: 16px; }
+  .logo-icon {
+    width: 52px; height: 52px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--kimm), #4B8BFF);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,87,255,0.3);
+  }
+  .logo-label { font-family: var(--mono); font-size: 13px; letter-spacing: 0.15em; color: var(--kimm); text-transform: uppercase; font-weight: 500; margin-bottom: 3px; }
+  .logo-title { font-size: 24px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+  .logo-title span { color: var(--kimm); }
+  .header-meta { font-family: var(--mono); font-size: 14px; color: var(--muted); text-align: right; line-height: 2; }
+  .header-meta strong { color: var(--text2); font-weight: 600; }
+
+  /* ── LOADING OVERLAY ── */
+  #loading-overlay {
+    position: fixed; inset: 0; background: rgba(255,255,255,0.97);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 200; gap: 24px; transition: opacity 0.4s;
+  }
+  #loading-overlay.hidden { opacity: 0; pointer-events: none; }
+  .spinner {
+    width: 48px; height: 48px;
+    border: 3px solid var(--border);
+    border-top-color: var(--kimm);
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 18px; font-weight: 600; color: var(--text2); letter-spacing: 0.02em; }
+  .loading-items { font-family: var(--mono); font-size: 14px; color: var(--muted); text-align: center; line-height: 2.2; }
+  .loading-item-done { color: var(--success); font-weight: 600; }
+  .loading-item-fail { color: var(--danger); }
+
+  /* ── ERROR BANNER ── */
+  .error-banner {
+    background: #FEF2F2; border: 1px solid #FECACA;
+    border-radius: var(--radius); padding: 14px 18px; margin-bottom: 20px;
+    font-size: 16px; color: var(--danger); display: none; font-weight: 500;
+  }
+  .error-banner.show { display: block; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; gap: 2px; margin: 0 0 28px;
+    background: var(--surface); border-radius: 12px; padding: 5px;
+    box-shadow: var(--shadow-sm); width: fit-content;
+  }
+  .tab {
+    font-family: var(--sans); font-size: 17px; font-weight: 500;
+    padding: 10px 24px; border: none; cursor: pointer;
+    color: var(--muted); background: transparent;
+    border-radius: 9px; transition: all 0.2s;
+  }
+  .tab:hover { color: var(--text2); background: var(--surface2); }
+  .tab.active {
+    color: var(--kimm); background: rgba(0,87,255,0.08);
+    font-weight: 600; box-shadow: 0 1px 4px rgba(0,87,255,0.15);
+  }
+
+  .tab-content { }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── REFRESH ROW ── */
+  .refresh-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+  }
+  .last-updated { font-family: var(--mono); font-size: 14px; color: var(--muted); }
+  .last-updated span { color: var(--success); font-weight: 600; }
+  .refresh-btn {
+    font-family: var(--sans); font-size: 16px; font-weight: 600;
+    padding: 10px 22px; background: var(--kimm);
+    border: none; border-radius: 8px;
+    color: #fff; cursor: pointer; transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,87,255,0.25);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .refresh-btn:hover { background: #0044CC; box-shadow: 0 4px 12px rgba(0,87,255,0.35); transform: translateY(-1px); }
+  .refresh-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; background: #0044CC; }
+  #gh-settings-btn:hover { background: var(--surface2) !important; color: var(--text) !important; box-shadow: var(--shadow-sm) !important; transform: translateY(-1px); }
+  .refresh-btn .btn-icon { display: inline-block; }
+  .refresh-btn:disabled .btn-icon { animation: spin 0.7s linear infinite; }
+
+  /* ── SUMMARY BAR ── */
+  .summary-bar { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; margin-bottom: 22px; }
+  .summary-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 20px;
+    display: flex; align-items: center; gap: 14px;
+    box-shadow: var(--shadow-sm); transition: box-shadow 0.2s;
+  }
+  .summary-item:hover { box-shadow: var(--shadow-md); }
+  .summary-icon { font-size: 32px; flex-shrink: 0; }
+  .summary-num { font-family: var(--mono); font-size: 32px; font-weight: 700; line-height: 1; }
+  .summary-lbl { font-size: 14px; color: var(--muted); margin-top: 3px; font-weight: 500; }
+
+  /* ── ALERT ── */
+  .alert-box {
+    background: #FFFBEB; border: 1px solid #FDE68A;
+    border-left: 4px solid var(--warn);
+    border-radius: var(--radius); padding: 16px 20px; margin-bottom: 22px;
+    font-size: 17px; line-height: 1.9; color: var(--text2);
+    box-shadow: var(--shadow-sm);
+  }
+  .alert-box strong { color: #92400E; font-weight: 700; }
+
+  /* ── CARDS ── */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px;
+    position: relative; overflow: hidden;
+    transition: box-shadow 0.25s, transform 0.25s;
+    box-shadow: var(--shadow-sm);
+  }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: 14px 14px 0 0; }
+  .card.kimm::before   { background: linear-gradient(90deg, #0057FF, #4B8BFF); }
+  .card.skku::before   { background: linear-gradient(90deg, #00A878, #34D399); }
+  .card.nnfc::before   { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+  .card.kit::before    { background: linear-gradient(90deg, #EA4C2B, #FB923C); }
+  .card.finelab::before{ background: linear-gradient(90deg, #D97706, #FCD34D); }
+  .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
+  .card-title { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 5px; }
+  .card-org { font-size: 22px; font-weight: 700; }
+  .card-org.kimm   { color: var(--kimm); }
+  .card-org.skku   { color: var(--skku); }
+  .card-org.nnfc   { color: var(--nnfc); }
+  .card-org.kit    { color: var(--kit); }
+  .card-org.finelab{ color: var(--finelab); }
+
+  .badge { font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 100px; }
+  .badge-ok   { background: #D1FAE5; color: #065F46; }
+  .badge-warn { background: #FEF3C7; color: #92400E; }
+  .badge-info { background: #DBEAFE; color: #1E40AF; }
+  .badge-none { background: var(--surface2); color: var(--muted); }
+
+  .progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; }
+  .progress-label { font-size: 16px; color: var(--text2); font-weight: 500; }
+  .progress-count { font-family: var(--mono); font-size: 16px; font-weight: 600; color: var(--text); }
+  .progress-bar-bg { height: 10px; background: var(--surface2); border-radius: 5px; overflow: hidden; margin-bottom: 18px; }
+  .progress-bar-fill { height: 100%; border-radius: 4px; transition: width 0.9s cubic-bezier(0.16,1,0.3,1); }
+  .fill-kimm   { background: linear-gradient(90deg, #0057FF, #4B8BFF); }
+  .fill-skku   { background: linear-gradient(90deg, #00A878, #34D399); }
+  .fill-nnfc   { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+  .fill-kit    { background: linear-gradient(90deg, #EA4C2B, #FB923C); }
+  .fill-finelab{ background: linear-gradient(90deg, #D97706, #FCD34D); }
+
+  .stat-row { display: flex; gap: 0; border-top: 1px solid var(--border); padding-top: 16px; }
+  .stat-item { flex: 1; text-align: center; }
+  .stat-item + .stat-item { border-left: 1px solid var(--border); }
+  .stat-value { font-family: var(--mono); font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+  .stat-label { font-size: 14px; color: var(--muted); font-weight: 500; }
+
+  /* ── FLOW ── */
+  .flow-section {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px; margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .flow-title {
+    font-size: 14px; font-weight: 700; letter-spacing: 0.12em;
+    color: var(--muted); text-transform: uppercase; margin-bottom: 22px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .flow-title::before { content: ''; display: inline-block; width: 14px; height: 3px; background: var(--kimm); border-radius: 2px; }
+  .flow-diagram { display: flex; align-items: center; overflow-x: auto; padding-bottom: 8px; gap: 0; }
+  .flow-node {
+    flex-shrink: 0; text-align: center; padding: 18px 20px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    min-width: 120px; background: var(--surface);
+    box-shadow: var(--shadow-sm); transition: box-shadow 0.2s;
+  }
+  .flow-node:hover { box-shadow: var(--shadow-md); }
+  .flow-node-org { font-family: var(--sans); font-size: 17px; font-weight: 700; margin-bottom: 5px; }
+  .flow-node-desc { font-size: 14px; color: var(--muted); line-height: 1.5; }
+  .flow-arrow { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; padding: 0 6px; gap: 4px; }
+  .flow-arrow-line { width: 48px; height: 2px; background: var(--border2); position: relative; }
+  .flow-arrow-line::after { content: '▶'; position: absolute; right: -10px; top: -8px; font-size: 13px; color: var(--border2); }
+  .flow-arrow-label { font-family: var(--mono); font-size: 12px; color: var(--kimm); white-space: nowrap; font-weight: 600; }
+  .flow-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media(max-width:700px){ .flow-two-col { grid-template-columns: 1fr; } }
+
+  /* ── TABLE ── */
+  .table-wrapper {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .table-header-row {
+    padding: 16px 22px 14px; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    background: var(--surface2);
+  }
+  .table-title { font-size: 16px; font-weight: 700; letter-spacing: 0.08em; color: var(--text2); text-transform: uppercase; }
+  .month-select {
+    font-family: var(--mono); font-size: 16px; background: var(--surface);
+    border: 1.5px solid var(--border); color: var(--text);
+    padding: 8px 16px; border-radius: 8px; cursor: pointer; outline: none;
+    font-weight: 500;
+  }
+  .month-select:focus { border-color: var(--kimm); }
+  table { width: 100%; border-collapse: collapse; font-size: 17px; }
+  thead th {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+    color: var(--muted); text-transform: uppercase;
+    padding: 14px 18px; text-align: left;
+    border-bottom: 1px solid var(--border); white-space: nowrap;
+    background: var(--surface2);
+  }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #F0F5FF; }
+  tbody td { padding: 15px 18px; vertical-align: middle; }
+  .td-mono { font-family: var(--mono); font-size: 16px; }
+  .qty-display { font-family: var(--mono); display: flex; align-items: center; gap: 5px; font-size: 16px; }
+  .qty-done { color: var(--success); font-weight: 700; }
+  .qty-slash { color: var(--muted); }
+  .qty-total { color: var(--muted); }
+  .no-data { text-align: center; padding: 40px; color: var(--muted); font-size: 17px; }
+
+  /* ── SCHEDULE ── */
+  .schedule-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+  .schedule-meta { font-size: 16px; color: var(--muted); margin-bottom: 6px; line-height: 1.6; font-weight: 500; }
+  .sch-global-bar-bg { height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 28px; overflow: hidden; }
+  .sch-global-bar-fill { height: 100%; background: linear-gradient(90deg, var(--kimm), var(--skku)); border-radius: 3px; transition: width 1s cubic-bezier(0.16,1,0.3,1); }
+  .schedule-pct-label { font-family: var(--mono); font-size: 17px; font-weight: 600; color: var(--text2); }
+  .schedule-pct-label span { color: var(--skku); font-weight: 700; font-size: 26px; }
+  .schedule-legend { display: flex; gap: 16px; flex-wrap: wrap; }
+  .leg-item { display: flex; align-items: center; gap: 7px; font-size: 16px; color: var(--muted); font-weight: 500; }
+  .leg-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
+  .quarters-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+  @media(max-width:900px){ .quarters-grid { grid-template-columns: 1fr; } }
+  .quarter-block {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-sm);
+  }
+  .quarter-header {
+    padding: 18px 22px 16px; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--surface2);
+  }
+  .quarter-label { font-size: 13px; font-weight: 700; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; margin-bottom: 5px; }
+  .quarter-title { font-size: 17px; font-weight: 700; line-height: 1.4; color: var(--text); }
+  .qpct { font-family: var(--mono); font-size: 32px; font-weight: 700; line-height: 1; }
+  .qpct-label { font-size: 13px; color: var(--muted); font-weight: 600; text-align: right; }
+  .quarter-bar-bg { height: 4px; background: var(--border); }
+  .quarter-bar-fill { height: 100%; transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .months-list { padding: 10px 0 14px; }
+  .month-group { padding-bottom: 4px; }
+  .month-label-row { padding: 12px 22px 7px; display: flex; align-items: center; gap: 10px; }
+  .month-badge {
+    font-size: 13px; font-weight: 700; padding: 4px 14px;
+    border-radius: 100px; border: 1.5px solid var(--border2);
+    color: var(--text2); letter-spacing: 0.06em; white-space: nowrap;
+    background: var(--surface2);
+  }
+  .month-rule { flex: 1; height: 1px; background: var(--border); }
+  .task-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 10px 24px; cursor: pointer;
+    transition: background 0.15s; border-radius: 6px; margin: 0 10px;
+  }
+  .task-item:hover { background: #F0F5FF; }
+  .task-item.milestone { background: #FFFBEB; }
+  .task-item.milestone:hover { background: #FEF3C7; }
+  .task-checkbox {
+    flex-shrink: 0; width: 22px; height: 22px; border-radius: 5px;
+    border: 2px solid var(--border2); display: flex; align-items: center;
+    justify-content: center; margin-top: 2px; transition: all 0.2s;
+    background: var(--surface);
+  }
+  .task-item.done .task-checkbox { background: var(--success); border-color: var(--success); }
+  .task-item.done .task-checkbox::after { content: '✓'; font-size: 13px; color: #fff; font-weight: 700; }
+  .task-right { flex: 1; min-width: 0; }
+  .task-text { font-size: 17px; line-height: 1.55; color: var(--text); transition: color 0.2s; }
+  .task-item.done .task-text { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--muted); }
+  .task-item.milestone .task-text { font-weight: 700; }
+  .task-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  .task-tag { font-size: 13px; font-weight: 600; padding: 3px 10px; border-radius: 4px; border: 1.5px solid; white-space: nowrap; }
+  .tag-kimm { color: var(--kimm);    border-color: #BFDBFE; background: #EFF6FF; }
+  .tag-skku { color: var(--skku);    border-color: #A7F3D0; background: #ECFDF5; }
+  .tag-nnfc { color: var(--nnfc);    border-color: #DDD6FE; background: #F5F3FF; }
+  .tag-kit  { color: var(--kit);     border-color: #FDBA74; background: #FFF7ED; }
+  .tag-fl   { color: var(--finelab); border-color: #FDE68A; background: #FFFBEB; }
+  .milestone-star { font-size: 18px; color: var(--finelab); flex-shrink: 0; margin-top: 1px; }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--surface2); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- Loading Overlay -->
+<div id="loading-overlay">
+  <div class="spinner"></div>
+  <div class="loading-text">데이터 불러오는 중...</div>
+  <div class="loading-items" id="loading-items"></div>
+</div>
+
+<div class="wrapper">
+  <header>
+    <div>
+      <div class="logo-label">NRF NanoConnect · 과제관리시스템</div>
+      <div class="logo-title">나노커넥트 <span>샘플 현황</span> 대시보드</div>
+    </div>
+    <div class="header-meta">
+      <div>현재 월: <strong id="hdr-month">—</strong></div>
+      <div>데이터 기준: <strong id="hdr-updated">—</strong></div>
+      <div>참여기관: <strong>5개 기관</strong></div>
+    </div>
+  </header>
+
+  <div class="tab-bar">
+    <button class="tab active" data-tab="overview">📊 월간 현황</button>
+    <button class="tab" data-tab="flow">🔀 샘플 흐름</button>
+    <button class="tab" data-tab="tracker">📋 상세 추적</button>
+    <button class="tab" data-tab="schedule">📅 2026 추진 일정</button>
+  </div>
+
+  <div class="tab-content">
+    <div id="error-banner" class="error-banner"></div>
+
+    <!-- ── OVERVIEW ── -->
+    <div id="tab-overview" class="section active">
+      <div class="refresh-row">
+        <div class="last-updated">마지막 업데이트: <span id="last-updated-time">—</span></div>
+        <button class="refresh-btn" id="refresh-btn" onclick="loadData()"><span class="btn-icon">↻</span> 새로고침</button>
+      </div>
+      <div class="summary-bar" id="summary-bar">
+        <div class="summary-item"><div class="summary-icon">📦</div><div><div class="summary-num" id="sum-done" style="color:var(--accent2)">—</div><div class="summary-lbl">이번 달 완료</div></div></div>
+        <div class="summary-item"><div class="summary-icon">🎯</div><div><div class="summary-num" id="sum-plan" style="color:var(--text)">—</div><div class="summary-lbl">이번 달 목표</div></div></div>
+        <div class="summary-item"><div class="summary-icon">✅</div><div><div class="summary-num" id="sum-pct" style="color:var(--success)">—</div><div class="summary-lbl">전체 달성률</div></div></div>
+        <div class="summary-item"><div class="summary-icon">⚠️</div><div><div class="summary-num" id="sum-warn" style="color:var(--warn)">—</div><div class="summary-lbl">병목 항목</div></div></div>
+        <div class="summary-item"><div class="summary-icon">🚚</div><div><div class="summary-num" id="sum-pending" style="color:var(--accent)">—</div><div class="summary-lbl">전달 대기</div></div></div>
+      </div>
+      <div class="alert-box" id="alert-box">데이터 로드 중...</div>
+      <div class="cards-grid" id="cards-grid"></div>
+    </div>
+
+    <!-- ── FLOW ── -->
+    <div id="tab-flow" class="section">
+      <div class="flow-section">
+        <div class="flow-title">▸ 공정 1 — SKKU 기반 (순서 중요)</div>
+        <div class="flow-diagram">
+          <div class="flow-node"><div class="flow-node-org" style="color:var(--accent)">KIMM</div><div class="flow-node-desc">희생층<br>기판 제작</div></div>
+          <div class="flow-arrow"><div class="flow-arrow-line"></div><div class="flow-arrow-label">기판 전달</div></div>
+          <div class="flow-node"><div class="flow-node-org" style="color:var(--accent2)">SKKU</div><div class="flow-node-desc">QD-EL<br>박막 제작</div></div>
+          <div class="flow-arrow"><div class="flow-arrow-line"></div><div class="flow-arrow-label">박막 전달</div></div>
+          <div class="flow-node"><div class="flow-node-org" style="color:var(--accent)">KIMM</div><div class="flow-node-desc">롤 스탬프<br>전사</div></div>
+          <div class="flow-arrow"><div class="flow-arrow-line"></div><div class="flow-arrow-label">전사 기판</div></div>
+          <div class="flow-node"><div class="flow-node-org" style="color:var(--accent4)">NNFC</div><div class="flow-node-desc">마스크<br>패턴 형성</div></div>
+          <div class="flow-arrow"><div class="flow-arrow-line"></div><div class="flow-arrow-label">반환</div></div>
+          <div class="flow-node"><div class="flow-node-org" style="color:var(--accent)">KIMM</div><div class="flow-node-desc">RIE 화소<br>패터닝·점등</div></div>
+        </div>
+      </div>
+      <div class="flow-section">
+        <div class="flow-title">▸ 공정 2 — 파인랩 기반 (순서 중요)</div>
+        <div class="flow-diagram">
+          <div class="flow-node"><div class="flow-node-org" style="color:var(--accent)">KIMM</div><div class="flow-node-desc">희생층<br>기판 제작</div></div>
+          <div class="flow-arrow"><div class="flow-arrow-line"></div><div class="flow-arrow-label">기판 전달</div></div>
+          <div class="flow-node"><div class="flow-node-org" style="color:var(--warn)">파인랩</div><div class="flow-node-desc">QD 박막<br>샘플 제작</div></div>
+          <div class="flow-arrow"><div class="flow-arrow-line"></div><div class="flow-arrow-label">박막 전달</div></div>
+          <div class="flow-node"><div class="flow-node-org" style="color:var(--accent)">KIMM</div><div class="flow-node-desc">롤 스탬프<br>전사</div></div>
+          <div class="flow-arrow"><div class="flow-arrow-line"></div><div class="flow-arrow-label">전사 기판</div></div>
+          <div class="flow-node"><div class="flow-node-org" style="color:var(--accent4)">NNFC</div><div class="flow-node-desc">마스크<br>패턴 형성</div></div>
+          <div class="flow-arrow"><div class="flow-arrow-line"></div><div class="flow-arrow-label">반환</div></div>
+          <div class="flow-node"><div class="flow-node-org" style="color:var(--accent)">KIMM</div><div class="flow-node-desc">RIE 화소<br>패터닝·점등</div></div>
+        </div>
+      </div>
+      <div class="flow-section" style="margin-bottom:0">
+        <div class="flow-title">▸ 독립 공정 — 순서 무관</div>
+        <div class="flow-two-col">
+          <div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:10px">NNFC → KIMM</div>
+            <div class="flow-diagram">
+              <div class="flow-node"><div class="flow-node-org" style="color:var(--accent4)">NNFC</div><div class="flow-node-desc">8인치<br>백플레인</div></div>
+              <div class="flow-arrow"><div class="flow-arrow-line"></div><div class="flow-arrow-label">2달 / 5매</div></div>
+              <div class="flow-node"><div class="flow-node-org" style="color:var(--accent)">KIMM</div><div class="flow-node-desc">전사 기판<br>활용</div></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:10px">금오공대 → KIMM</div>
+            <div class="flow-diagram">
+              <div class="flow-node"><div class="flow-node-org" style="color:var(--accent3)">금오공대</div><div class="flow-node-desc">SMP 코팅<br>PET 필름</div></div>
+              <div class="flow-arrow"><div class="flow-arrow-line"></div><div class="flow-arrow-label">월 10매</div></div>
+              <div class="flow-node"><div class="flow-node-org" style="color:var(--accent)">KIMM</div><div class="flow-node-desc">롤 스탬프<br>소재 활용</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TRACKER ── -->
+    <div id="tab-tracker" class="section">
+      <div class="table-wrapper">
+        <div class="table-header-row">
+          <div class="table-title">▸ 기관별 샘플 전달 추적</div>
+          <select class="month-select" id="month-select" onchange="renderTracker()"></select>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead>
+              <tr>
+                <th>배치 ID</th><th>발신</th><th>수신</th><th>샘플 종류</th>
+                <th>계획</th><th>완료 / 계획</th><th>완료·발송일</th><th>상태</th><th>비고</th>
+              </tr>
+            </thead>
+            <tbody id="tracker-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SCHEDULE ── -->
+    <div id="tab-schedule" class="section">
+      <div class="schedule-header">
+        <div>
+          <div class="schedule-meta">2026년 3차년도 · 8인치 웨이퍼 5000 PPI급 컬러 QD-EL 시작품 구현 및 공인인증</div>
+          <div class="schedule-pct-label">전체 달성률 <span id="sch-total-pct">0%</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <div class="schedule-legend">
+            <span class="leg-item"><span class="leg-dot" style="background:var(--success)"></span>완료</span>
+            <span class="leg-item"><span class="leg-dot" style="background:var(--border)"></span>예정</span>
+            <span class="leg-item"><span style="color:var(--warn);font-size:11px">★</span> 마일스톤</span>
+          </div>
+          <button class="refresh-btn" id="gh-settings-btn" onclick="openGhSettings()" style="padding:9px 16px;font-size:15px;background:var(--surface);color:var(--text2);border:1.5px solid var(--border2);box-shadow:none">
+            ⚙ GitHub 연동 설정
+          </button>
+          <span id="sch-save-status" style="font-family:var(--mono);font-size:13px;color:var(--muted)"></span>
+        </div>
+      </div>
+      <div class="sch-global-bar-bg"><div class="sch-global-bar-fill" id="sch-global-bar" style="width:0%"></div></div>
+
+      <!-- GitHub 설정 패널 -->
+      <div id="gh-settings-panel" style="display:none;background:var(--surface);border:1.5px solid var(--border2);border-radius:12px;padding:22px 24px;margin-bottom:20px">
+        <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
+          <span>🔑 GitHub 연동 설정</span>
+          <button onclick="closeGhSettings()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);line-height:1">×</button>
+        </div>
+        <div style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.8">
+          체크박스 변경 사항을 <code style="background:var(--surface2);padding:2px 6px;border-radius:4px">schedule_2026.md</code> 파일에 자동 반영하려면<br>
+          GitHub Personal Access Token (PAT)이 필요합니다.<br>
+          <a href="https://github.com/settings/tokens/new?scopes=repo&description=nanoconnect-dashboard" target="_blank" style="color:var(--accent)">→ PAT 발급하기 (repo 권한 필요)</a>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:6px">GitHub PAT (브라우저에만 저장, 서버 전송 없음)</div>
+            <input type="password" id="gh-pat-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+              style="width:100%;padding:10px 14px;border:1.5px solid var(--border2);border-radius:8px;font-family:var(--mono);font-size:14px;color:var(--text);background:var(--surface2);outline:none">
+          </div>
+          <div style="display:flex;gap:8px">
+            <button onclick="saveGhPat()" style="padding:10px 18px;background:var(--kimm);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap">저장</button>
+            <button onclick="clearGhPat()" style="padding:10px 14px;background:var(--surface2);color:var(--muted);border:1.5px solid var(--border);border-radius:8px;font-size:14px;cursor:pointer">삭제</button>
+          </div>
+        </div>
+        <div id="gh-pat-status" style="margin-top:10px;font-size:13px;font-family:var(--mono)"></div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);line-height:1.9">
+          <strong style="color:var(--text2)">저장 방식:</strong><br>
+          · PAT는 이 브라우저의 <code style="background:var(--surface2);padding:1px 5px;border-radius:3px">localStorage</code>에만 저장되며 외부로 전송되지 않습니다.<br>
+          · 체크박스 클릭 시 GitHub API를 통해 <code style="background:var(--surface2);padding:1px 5px;border-radius:3px">nanoconnect-project/dashboard</code> 레포지토리의<br>
+          &nbsp;&nbsp;<code style="background:var(--surface2);padding:1px 5px;border-radius:3px">schedule_2026.md</code> 파일이 직접 업데이트됩니다.<br>
+          · PAT 미설정 시 체크 상태는 이 브라우저에만 저장됩니다.
+        </div>
+      </div>
+
+      <div class="quarters-grid" id="schedule-root"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════
+//  CONFIG — GitHub Raw URL
+// ════════════════════════════════════════════════
+const BASE = 'https://raw.githubusercontent.com/nanoconnect-project';
+
+const SOURCES = {
+  skku:           `${BASE}/SKKU-QD-synthesis/main/samples/skku_samples.csv`,
+  finelab:        `${BASE}/FineLab-frontplane/main/samples/finelab_samples.csv`,
+  nnfc_backplane: `${BASE}/NNFC-backplane/main/samples/nnfc_backplane.csv`,
+  nnfc_masking:   `${BASE}/NNFC-backplane/main/samples/nnfc_masking.csv`,
+  kit:            `${BASE}/KIT-SMP-film/main/samples/kit_samples.csv`,
+  kimm_sub:       `${BASE}/KIMM-roll-transfer/main/samples/kimm_substrate.csv`,
+  kimm_tr:        `${BASE}/KIMM-roll-transfer/main/samples/kimm_transfer.csv`,
+};
+
+const SOURCE_LABELS = {
+  skku: 'SKKU', finelab: '파인랩',
+  nnfc_backplane: 'NNFC 백플레인', nnfc_masking: 'NNFC 마스크',
+  kit: '금오공대', kimm_sub: 'KIMM 기판', kimm_tr: 'KIMM 전사',
+};
+
+// ════════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════════
+let DB = {};          // 파싱된 전체 데이터
+let CURRENT_MONTH = '';
+
+// ════════════════════════════════════════════════
+//  CSV PARSER
+// ════════════════════════════════════════════════
+function parseCSV(text) {
+  const lines = text.trim().split('\n').map(l => l.trim()).filter(Boolean);
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(',').map(h => h.trim());
+  return lines.slice(1).map(line => {
+    // 쉼표 포함 셀(따옴표) 처리
+    const values = [];
+    let cur = '', inQ = false;
+    for (const ch of line) {
+      if (ch === '"') { inQ = !inQ; }
+      else if (ch === ',' && !inQ) { values.push(cur.trim()); cur = ''; }
+      else cur += ch;
+    }
+    values.push(cur.trim());
+    return Object.fromEntries(headers.map((h, i) => [h, (values[i] ?? '').trim()]));
+  });
+}
+
+// ════════════════════════════════════════════════
+//  FETCH ALL
+// ════════════════════════════════════════════════
+async function loadData() {
+  const btn = document.getElementById('refresh-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="btn-icon">↻</span> 불러오는 중...';
+
+  const overlay = document.getElementById('loading-overlay');
+  const itemsEl = document.getElementById('loading-items');
+  overlay.classList.remove('hidden');
+  itemsEl.innerHTML = Object.values(SOURCE_LABELS).map(l => `<div id="li-${l}">${l} ...</div>`).join('');
+
+  const errors = [];
+
+  await Promise.all(Object.entries(SOURCES).map(async ([key, url]) => {
+    const label = SOURCE_LABELS[key];
+    const el = document.getElementById(`li-${label}`);
+    try {
+      const res = await fetch(url + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      DB[key] = parseCSV(text);
+      if (el) { el.textContent = `✓ ${label}`; el.className = 'loading-item-done'; }
+    } catch (e) {
+      DB[key] = [];
+      errors.push(`${label}: ${e.message}`);
+      if (el) { el.textContent = `✗ ${label} (실패)`; el.className = 'loading-item-fail'; }
+    }
+  }));
+
+  await new Promise(r => setTimeout(r, 600)); // 결과 잠깐 표시
+  overlay.classList.add('hidden');
+
+  const now = new Date();
+  CURRENT_MONTH = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+  document.getElementById('hdr-month').textContent = CURRENT_MONTH;
+  document.getElementById('last-updated-time').textContent =
+    now.toLocaleString('ko-KR', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('hdr-updated').textContent =
+    now.toLocaleString('ko-KR', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+
+  // Error banner
+  const errEl = document.getElementById('error-banner');
+  if (errors.length) {
+    errEl.textContent = `⚠ 일부 데이터 로드 실패: ${errors.join(' | ')} — 해당 기관 레포지토리가 public인지 확인하세요.`;
+    errEl.classList.add('show');
+  } else {
+    errEl.classList.remove('show');
+  }
+
+  buildMonthSelect();
+  renderOverview();
+  renderTracker();
+
+  btn.disabled = false;
+  btn.innerHTML = '<span class="btn-icon">↻</span> 새로고침';
+}
+
+// ════════════════════════════════════════════════
+//  HELPERS
+// ════════════════════════════════════════════════
+function getMonthRows(key) {
+  return (DB[key] || []).filter(r => {
+    const ym = r.year_month || r.period || '';
+    return ym.startsWith(CURRENT_MONTH) || ym.includes(CURRENT_MONTH.slice(5,7));
+  });
+}
+
+function pct(done, plan) {
+  if (!plan || plan === 0) return 0;
+  return Math.min(100, Math.round(done / plan * 100));
+}
+
+function statusBadge(s) {
+  if (!s) return `<span class="badge badge-none">—</span>`;
+  if (['발송완료','NNFC발송완료','완료','반환완료'].includes(s)) return `<span class="badge badge-ok">${s}</span>`;
+  if (['제작중','전사중','작업중','진행중'].includes(s)) return `<span class="badge badge-warn">${s}</span>`;
+  return `<span class="badge badge-info">${s}</span>`;
+}
+
+const ORG_COLOR = { KIMM:'var(--accent)', SKKU:'var(--accent2)', NNFC:'var(--accent4)', 금오공대:'var(--accent3)', 파인랩:'var(--warn)' };
+
+// ════════════════════════════════════════════════
+//  MONTH SELECT (TRACKER)
+// ════════════════════════════════════════════════
+function buildMonthSelect() {
+  const allMonths = new Set();
+  Object.values(DB).forEach(rows => rows.forEach(r => {
+    const ym = r.year_month || '';
+    if (/^\d{4}-\d{2}$/.test(ym)) allMonths.add(ym);
+  }));
+  const sorted = [...allMonths].sort().reverse();
+  if (!sorted.includes(CURRENT_MONTH)) sorted.unshift(CURRENT_MONTH);
+  const sel = document.getElementById('month-select');
+  sel.innerHTML = sorted.map(m => `<option value="${m}"${m===CURRENT_MONTH?' selected':''}>${m.replace('-','년 ')}월</option>`).join('');
+}
+
+// ════════════════════════════════════════════════
+//  OVERVIEW
+// ════════════════════════════════════════════════
+function renderOverview() {
+  // ── 기관별 집계 ──
+  const orgs = buildOrgStats();
+
+  // ── Summary ──
+  let totalDone = 0, totalPlan = 0, warnCount = 0, pendingCount = 0;
+  orgs.forEach(o => {
+    totalDone += o.done; totalPlan += o.plan;
+    if (o.status === 'warn') warnCount++;
+    pendingCount += o.pending;
+  });
+  document.getElementById('sum-done').textContent = totalDone;
+  document.getElementById('sum-plan').textContent = totalPlan;
+  const p = pct(totalDone, totalPlan);
+  document.getElementById('sum-pct').textContent = p + '%';
+  document.getElementById('sum-pct').style.color = p >= 80 ? 'var(--success)' : p >= 50 ? 'var(--warn)' : 'var(--danger)';
+  document.getElementById('sum-warn').textContent = warnCount;
+  document.getElementById('sum-pending').textContent = pendingCount;
+
+  // ── Alert ──
+  const alerts = orgs.filter(o => o.status === 'warn').map(o =>
+    `<strong>[병목 경고]</strong> ${o.name} — ${o.plan}매 목표 중 ${o.done}매 완료 (미완 ${o.plan - o.done}매)`
+  );
+  const alertEl = document.getElementById('alert-box');
+  if (alerts.length) {
+    alertEl.innerHTML = alerts.join('<br>');
+    alertEl.style.display = 'block';
+  } else {
+    alertEl.innerHTML = '✅ 이번 달 병목 항목이 없습니다.';
+    alertEl.style.display = 'block';
+  }
+
+  // ── Cards ──
+  document.getElementById('cards-grid').innerHTML = orgs.map(o => orgCard(o)).join('');
+}
+
+function buildOrgStats() {
+  const m = CURRENT_MONTH;
+
+  // SKKU
+  const skku = filterMonth(DB.skku, m);
+  const skkuDone = sum(skku, 'qty_completed'), skkuPlan = sum(skku, 'qty_planned');
+
+  // 파인랩
+  const fl = filterMonth(DB.finelab, m);
+  const flDone = sum(fl, 'qty_completed'), flPlan = sum(fl, 'qty_planned');
+
+  // NNFC backplane (2달 단위 - 현재 달 포함 period)
+  const bp = (DB.nnfc_backplane||[]).filter(r => periodIncludes(r.period, m));
+  const bpDone = sum(bp, 'qty_completed'), bpPlan = sum(bp, 'qty_planned');
+
+  // NNFC masking
+  const mk = filterMonth(DB.nnfc_masking, m);
+  const mkDone = sum(mk, 'qty_masked'), mkPlan = sum(mk, 'qty_received') || 5;
+
+  // 금오공대
+  const kit = filterMonth(DB.kit, m);
+  const kitDone = sum(kit, 'qty_completed'), kitPlan = sum(kit, 'qty_planned');
+
+  // KIMM substrate (희생층 기판 발송 — kimm_substrate.csv)
+  const ksub = filterMonth(DB.kimm_sub, m);
+  const ksubDone = sum(ksub, 'qty_sent'), ksubPlan = sum(ksub, 'qty_planned');
+
+  // KIMM transfer (QD 박막 전사 — kimm_transfer.csv)
+  const ktr = filterMonth(DB.kimm_tr, m);
+  const ktrDone = sum(ktr, 'qty_transferred'), ktrPlan = sum(ktr, 'qty_planned');
+  const pending = ktr.filter(r => ['대기','전사중'].includes(r.status)).length;
+
+  // KIMM 전체 plan/done: 두 공정 합산
+  const kimmTotalPlan = ksubPlan + ktrPlan;
+  const kimmTotalDone = ksubDone + ktrDone;
+
+  function st(done, plan) {
+    if (plan === 0) return 'none';
+    return done >= plan ? 'ok' : done > 0 ? 'warn' : 'none';
+  }
+
+  return [
+    { key:'kimm', cls:'kimm', role:'주관기관', name:'KIMM', plan:kimmTotalPlan, done:kimmTotalDone, pending, status:st(kimmTotalDone, kimmTotalPlan),
+      bars:[{label:'희생층 기판 제작', done:ksubDone, plan:ksubPlan||10, fill:'fill-kimm'}, {label:'QD 박막 전사', done:ktrDone, plan:ktrPlan||5, fill:'fill-kimm'}] },
+    { key:'skku', cls:'skku', role:'참여기관', name:'SKKU 성균관대', plan:skkuPlan||5, done:skkuDone, pending:0, status:st(skkuDone,skkuPlan||5),
+      bars:[{label:'QD 박막 제작', done:skkuDone, plan:skkuPlan||5, fill:'fill-skku'}] },
+    { key:'finelab', cls:'finelab', role:'기업참여기관', name:'파인랩', plan:flPlan||5, done:flDone, pending:0, status:st(flDone,flPlan||5),
+      bars:[{label:'QD 박막 제작', done:flDone, plan:flPlan||5, fill:'fill-finelab'}] },
+    { key:'nnfc', cls:'nnfc', role:'참여기관', name:'NNFC', plan:bpPlan||5, done:bpDone+mkDone, pending:0, status:st(bpDone,bpPlan||5),
+      bars:[{label:'8인치 백플레인', done:bpDone, plan:bpPlan||5, fill:'fill-nnfc'},{label:'마스크 패턴', done:mkDone, plan:mkPlan, fill:'fill-nnfc'}] },
+    { key:'kit', cls:'kit', role:'참여기관', name:'금오공대', plan:kitPlan||10, done:kitDone, pending:0, status:st(kitDone,kitPlan||10),
+      bars:[{label:'SMP 코팅 PET', done:kitDone, plan:kitPlan||10, fill:'fill-kit'}] },
+  ];
+}
+
+function filterMonth(rows, ym) {
+  return (rows||[]).filter(r => (r.year_month||'') === ym);
+}
+function periodIncludes(period, ym) {
+  if (!period) return false;
+  const [start, end] = period.split('~').map(s => s.trim());
+  return ym >= start && ym <= end;
+}
+function sum(rows, field) {
+  return rows.reduce((acc, r) => acc + (parseInt(r[field])||0), 0);
+}
+
+function orgCard(o) {
+  const barsHtml = o.bars.map(b => {
+    const p = pct(b.done, b.plan);
+    return `
+      <div class="progress-row"><span class="progress-label">${b.label}</span><span class="progress-count">${b.done} / ${b.plan}</span></div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill ${b.fill}" style="width:${p}%"></div></div>`;
+  }).join('');
+
+  const badgeCls = o.status === 'ok' ? 'badge-ok' : o.status === 'warn' ? 'badge-warn' : 'badge-none';
+  const badgeTxt = o.status === 'ok' ? '완료' : o.status === 'warn' ? '진행중' : '대기';
+
+  return `<div class="card ${o.cls}">
+    <div class="card-header">
+      <div><div class="card-title">${o.role}</div><div class="card-org ${o.cls}">${o.name}</div></div>
+      <span class="badge ${badgeCls}">${badgeTxt}</span>
+    </div>
+    ${barsHtml}
+    <div class="stat-row">
+      <div class="stat-item"><div class="stat-value" style="color:${o.done>=o.plan?'var(--success)':'var(--warn)'}">${o.done}</div><div class="stat-label">완료</div></div>
+      <div class="stat-item"><div class="stat-value" style="color:var(--muted)">${o.plan - o.done < 0 ? 0 : o.plan - o.done}</div><div class="stat-label">미완료</div></div>
+      <div class="stat-item"><div class="stat-value" style="color:var(--muted)">${o.plan}</div><div class="stat-label">월 목표</div></div>
+    </div>
+  </div>`;
+}
+
+// ════════════════════════════════════════════════
+//  TRACKER
+// ════════════════════════════════════════════════
+function renderTracker() {
+  const sel = document.getElementById('month-select');
+  const ym = sel?.value || CURRENT_MONTH;
+  const tbody = document.getElementById('tracker-tbody');
+
+  const rows = [];
+
+  // SKKU
+  filterMonth(DB.skku, ym).forEach(r => rows.push({
+    id: r.batch_id, from:'SKKU', to:'KIMM', type: r.sample_type||'QD 박막',
+    plan: r.qty_planned, done: r.qty_completed, date: r.sent_date, status: r.status, notes: r.notes
+  }));
+  // 파인랩
+  filterMonth(DB.finelab, ym).forEach(r => rows.push({
+    id: r.batch_id, from:'파인랩', to:'KIMM', type: r.sample_type||'QD 박막',
+    plan: r.qty_planned, done: r.qty_completed, date: r.sent_date, status: r.status, notes: r.notes
+  }));
+  // NNFC 백플레인 (period 기반)
+  (DB.nnfc_backplane||[]).filter(r => periodIncludes(r.period, ym)).forEach(r => rows.push({
+    id: r.batch_id, from:'NNFC', to:'KIMM', type:`8인치 백플레인 (${r.period})`,
+    plan: r.qty_planned, done: r.qty_completed, date: r.sent_date, status: r.status, notes: r.notes
+  }));
+  // NNFC 마스크
+  filterMonth(DB.nnfc_masking, ym).forEach(r => rows.push({
+    id: r.batch_id, from:'NNFC', to:'KIMM', type:'마스크 패턴 반환',
+    plan: r.qty_received, done: r.qty_masked, date: r.return_date, status: r.status, notes: r.notes
+  }));
+  // 금오공대
+  filterMonth(DB.kit, ym).forEach(r => rows.push({
+    id: r.batch_id, from:'금오공대', to:'KIMM', type:`SMP PET (${r.smp_formulation||''})`,
+    plan: r.qty_planned, done: r.qty_completed, date: r.sent_date, status: r.status, notes: r.notes
+  }));
+  // KIMM 전사
+  filterMonth(DB.kimm_tr, ym).forEach(r => rows.push({
+    id: r.batch_id, from:'KIMM', to:'NNFC', type:`QD 전사 (${r.qd_source||''})`,
+    plan: r.qty_planned, done: r.qty_transferred, date: r.nnfc_sent_date||r.transfer_date, status: r.status, notes: r.notes
+  }));
+
+  if (!rows.length) {
+    tbody.innerHTML = `<tr><td colspan="9" class="no-data">이 달 데이터가 없습니다.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = rows.map(r => {
+    const plan = parseInt(r.plan)||0, done = parseInt(r.done)||0;
+    const p = pct(done, plan);
+    const fromColor = ORG_COLOR[r.from]||'var(--text)', toColor = ORG_COLOR[r.to]||'var(--text)';
+    return `<tr>
+      <td class="td-mono" style="color:var(--accent)">${r.id||'—'}</td>
+      <td style="color:${fromColor};font-weight:500">${r.from}</td>
+      <td style="color:${toColor};font-weight:500">${r.to}</td>
+      <td>${r.type}</td>
+      <td class="td-mono" style="text-align:center">${plan}</td>
+      <td><div class="qty-display"><span class="qty-done">${done}</span><span class="qty-slash">/</span><span class="qty-total">${plan}</span><span style="font-size:10px;color:var(--muted)">(${p}%)</span></div></td>
+      <td class="td-mono" style="font-size:11px;color:var(--muted)">${r.date||'—'}</td>
+      <td>${statusBadge(r.status)}</td>
+      <td style="font-size:12px;color:var(--muted)">${r.notes||'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ════════════════════════════════════════════════
+//  SCHEDULE — 일정 데이터 (HTML 내장 + GitHub 동기화)
+// ════════════════════════════════════════════════
+
+const SCHEDULE_MD_URL = `${BASE}/dashboard/main/schedule_2026.md`;
+
+const QUARTER_COLORS = [
+  'var(--accent)', 'var(--accent2)', 'var(--accent4)', 'var(--accent3)'
+];
+
+const ORG_TAG_CLS = {
+  KIMM:'tag-kimm', SKKU:'tag-skku', NNFC:'tag-nnfc', '금오공대':'tag-kit', '파인랩':'tag-fl'
+};
+
+// ── 내장 기본 일정 데이터 ─────────────────────────
+// GitHub 파일 로드 실패 시 이 데이터로 동작
+const DEFAULT_SCHEDULE_MD = `## 1분기 (1~3월)
+**단색 QD-EL 핵심 기술 완성 및 컬러 패널 제작 착수**
+
+### 1월
+* [ ] 단색 QD-EL 전사 공정 최적화 \`KIMM\` \`금오공대\`
+* [x] QD 박막 전사 기술이전 \`KIMM\` \`파인랩\`
+
+### 2월
+* [ ] 3차년도 수정계획서 업로드 및 과제협약 \`KIMM\`
+* [ ] 3차년도 시작품 제작 일정 수립 \`KIMM\`
+
+### 3월
+* [ ] Kick-off 미팅
+* [ ] 참여기관별 샘플 제작 및 평가 시스템 구축
+* [ ] 단층 QD-EL 박막 화소 패터닝 공정 구현
+* [ ] 5000 PPI 백플레인 제조 공정 확립 \`NNFC\`
+
+## 2분기 (4~6월)
+**RGB 컬러 QD-EL 적층 전사 개발 및 IMID 전시용 샘플 제작**
+
+### 4월
+* [ ] RGB QD-EL 4인치 박막 제조 공정 및 특성 평가 \`SKKU\`
+* [ ] RGB QD-EL 박막 적층 전사 공정 문제점 분석 및 개선 \`KIMM\` \`금오공대\`
+* [ ] 8인치 실리콘 백플레인 제작 \`NNFC\`
+
+### 5월
+* [ ] 8인치 스케일 RGB 컬러 적층 전사 시험 \`KIMM\`
+* [ ] 8인치 컬러 점등 백플레인 1차 제작 \`NNFC\`
+
+### 6월
+* [ ] ★ IMID 2026 전시용 8인치 5000 PPI 컬러 패널 제작 완료
+* [ ] 전시용 패널 점등 테스트 및 품질 검증 \`KIMM\` \`NNFC\`
+
+## 3분기 (7~9월)
+**IMID 2026 전시회 및 8인치 컬러 패널 품질 개선**
+
+### 7월
+* [ ] ★ IMID 2026 전시회 참가 — 5000 PPI급 8인치 컬러 QD-EL 패널 전시
+* [ ] 전시회 피드백 수렴 및 개선 방향 도출
+
+### 8월
+* [ ] 8인치 컬러 패널 수율 개선 \`금오공대\`
+* [ ] QD-EL 소자 효율 최적화 \`SKKU\`
+
+### 9월
+* [ ] 프론트플레인 제조 공정 실용화 완료 \`파인랩\`
+* [ ] ★ 공인인증용 최종 샘플 제작 착수
+
+## 4분기 (10~12월)
+**기술적 목표 달성 공인인증 및 과제 마무리**
+
+### 10월
+* [ ] 5000 PPI 달성 전자현미경 검사 인증 \`NNFC\`
+* [ ] QD-EL 소자 EQE 목표 달성 인증 \`SKKU\`
+
+### 11월
+* [ ] 8인치 웨이퍼 구현 인증 \`KIMM\`
+* [ ] 전사 수율 목표 달성 인증 \`KIMM\` \`금오공대\`
+* [ ] 전사 기반 양자점 디스플레이 제조 기술 이전 \`파인랩\`
+
+### 12월
+* [ ] ★ 전체 공인인증 완료 및 최종 성과 보고서 작성
+* [ ] 과제 마무리 및 정산 \`KIMM\`
 `;
 
 // ── MD 파서 ──────────────────────────────────────
@@ -984,10 +1964,12 @@ function parseScheduleMD(md) {
   for (const raw of lines) {
     const line = raw.trimEnd();
 
-    if (/^## Q\d/.test(line)) {
+    // 분기 헤더: "## Q1 · 1분기" 또는 "## 1분기" 두 형식 모두 지원
+    if (/^## /.test(line) && !/^### /.test(line)) {
       curMonth = null;
       curQ = { label: '', title: '', color: '', months: [] };
-      const m = line.match(/##\s+Q\d+\s*[···]?\s*(.+)/);
+      // Q1 · 1분기 형식이면 Q숫자 부분 제거, 아니면 ## 제거
+      const m = line.match(/##\s+(?:Q\d+\s*[····]?\s*)?(.+)/);
       curQ.label = m ? m[1].trim() : line.replace(/^##\s*/,'');
       curQ.color = QUARTER_COLORS[quarters.length] || 'var(--accent)';
       quarters.push(curQ);
@@ -1005,11 +1987,24 @@ function parseScheduleMD(md) {
       continue;
     }
 
-    if (/^- \[[ x]\]/.test(line) && curMonth) {
-      const done = /^- \[x\]/.test(line);
+    // 항목: "- [ ]", "- [x]", "* [ ]", "* [x]", "* 텍스트" 모두 지원
+    if (/^[*-] /.test(line) && curMonth) {
+      let done = false;
+      let textLine = line;
+      if (/^[*-] \[x\]/.test(line)) {
+        done = true;
+        textLine = line.replace(/^[*-] \[x\]\s*/, '');
+      } else if (/^[*-] \[ \]/.test(line)) {
+        done = false;
+        textLine = line.replace(/^[*-] \[ \]\s*/, '');
+      } else {
+        // 순수 불릿 (* 텍스트) → 미완료로 처리
+        done = false;
+        textLine = line.replace(/^[*-] /, '');
+      }
       const orgs = [];
-      for (const t of line.matchAll(/`([^`]+)`/g)) orgs.push(t[1]);
-      let text = line.replace(/^- \[[ x]\]\s*/,'').replace(/`[^`]+`/g,'').trim();
+      for (const t of textLine.matchAll(/`([^`]+)`/g)) orgs.push(t[1]);
+      let text = textLine.replace(/`[^`]+`/g,'').trim();
       const milestone = text.startsWith('★');
       text = text.replace(/^★\s*/,'').trim();
       taskIdx++;
@@ -1094,7 +2089,7 @@ function buildScheduleMD() {
         const check = t.done ? '[x]' : '[ ]';
         const star  = t.milestone ? '★ ' : '';
         const tags  = t.orgs.length ? ' ' + t.orgs.map(o => `\`${o}\``).join(' ') : '';
-        lines.push(`- ${check} ${star}${t.text}${tags}`);
+        lines.push(`* ${check} ${star}${t.text}${tags}`);
       });
       lines.push('');
     });
